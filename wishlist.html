@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>My Wishlist - CampusHub</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style>
+		.wishlist-item {
+			background: white;
+			border: 1px solid #e0e0e0;
+			border-radius: 8px;
+			padding: 15px;
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			transition: all 0.3s;
+		}
+		.wishlist-item:hover {
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
+		.wishlist-img {
+			width: 100px;
+			height: 100px;
+			object-fit: cover;
+			border-radius: 8px;
+			margin-right: 20px;
+		}
+		.wishlist-info {
+			flex: 1;
+		}
+		.wishlist-actions {
+			display: flex;
+			gap: 10px;
+		}
+	</style>
+</head>
+
+<body class="page-wrapper">
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">CampusHub</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="userHome.html">Home</a></li>
+					<li><a href="categories.html">Categories</a></li>
+					<li><a href="sellerListings.html">My Listings</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="wishlist.html"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+					<li><a href="cartDetails.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">3</span></a></li>
+					<li><a href="messages.html"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span></a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span> Syahrul <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="userProfile.html">My Profile</a></li>
+							<li><a href="orderDetails.html">My Orders</a></li>
+							<li><a href="sellerListings.html">My Listings</a></li>
+							<li><a href="addProduct.html">Sell Item</a></li>
+							<li class="divider"></li>
+							<li><a href="index.html">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Main Content -->
+	<div class="main-content" style="margin-top: 80px;">
+		<div class="container">
+			<h2 class="page-title">My Wishlist</h2>
+			<p style="color: #666; margin-bottom: 30px;">4 items saved</p>
+
+			<!-- Wishlist Items -->
+			<div class="wishlist-item">
+				<img src="images/iPhone.webp" alt="iPhone 13 Pro" class="wishlist-img">
+				<div class="wishlist-info">
+					<h4 style="margin: 0 0 8px 0;">APPLE iPhone 13 Pro (128GB)</h4>
+					<p style="color: #666; margin: 0 0 8px 0;">Used - Like New | Seller: Ahmad Faiz</p>
+					<p class="price" style="margin: 0;">RM 5,000.00</p>
+					<span class="label label-success" style="margin-top: 8px; display: inline-block;">Available</span>
+				</div>
+				<div class="wishlist-actions">
+					<a href="cartDetails.html" class="btn btn-primary">
+						<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+					</a>
+					<a href="productDetail.html" class="btn btn-default">View</a>
+					<button class="btn btn-default" title="Remove from wishlist">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="wishlist-item">
+				<img src="images/macbook.jpg" alt="MacBook Pro" class="wishlist-img">
+				<div class="wishlist-info">
+					<h4 style="margin: 0 0 8px 0;">MacBook Pro 14" (M1 Pro)</h4>
+					<p style="color: #666; margin: 0 0 8px 0;">Like New | Seller: Sarah Lim</p>
+					<p class="price" style="margin: 0;">RM 7,500.00</p>
+					<span class="label label-success" style="margin-top: 8px; display: inline-block;">Available</span>
+				</div>
+				<div class="wishlist-actions">
+					<a href="cartDetails.html" class="btn btn-primary">
+						<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+					</a>
+					<a href="productDetail.html" class="btn btn-default">View</a>
+					<button class="btn btn-default" title="Remove from wishlist">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="wishlist-item">
+				<img src="images/speaker.jpg" alt="JBL Speaker" class="wishlist-img">
+				<div class="wishlist-info">
+					<h4 style="margin: 0 0 8px 0;">JBL Flip 5 Bluetooth Speaker</h4>
+					<p style="color: #666; margin: 0 0 8px 0;">Good Condition | Seller: Ali Hassan</p>
+					<p class="price" style="margin: 0;">RM 280.00</p>
+					<span class="label label-success" style="margin-top: 8px; display: inline-block;">Available</span>
+				</div>
+				<div class="wishlist-actions">
+					<a href="cartDetails.html" class="btn btn-primary">
+						<span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+					</a>
+					<a href="productDetail.html" class="btn btn-default">View</a>
+					<button class="btn btn-default" title="Remove from wishlist">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="wishlist-item" style="opacity: 0.7;">
+				<img src="images/calculator.png" alt="Calculator" class="wishlist-img">
+				<div class="wishlist-info">
+					<h4 style="margin: 0 0 8px 0;">Casio Scientific Calculator fx-570EX</h4>
+					<p style="color: #666; margin: 0 0 8px 0;">Used - Good | Seller: Nurul Ain</p>
+					<p class="price" style="margin: 0; text-decoration: line-through;">RM 85.00</p>
+					<span class="label label-danger" style="margin-top: 8px; display: inline-block;">Sold</span>
+				</div>
+				<div class="wishlist-actions">
+					<button class="btn btn-default" disabled>
+						<span class="glyphicon glyphicon-shopping-cart"></span> Unavailable
+					</button>
+					<button class="btn btn-default" title="Remove from wishlist">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Empty State (Hidden) -->
+			<div class="text-center" style="padding: 60px 20px; display: none;">
+				<span class="glyphicon glyphicon-heart-empty" style="font-size: 64px; color: #ddd;"></span>
+				<h3 style="color: #666; margin-top: 20px;">Your wishlist is empty</h3>
+				<p style="color: #999;">Save items you love by clicking the heart icon</p>
+				<a href="userHome.html" class="btn btn-primary" style="margin-top: 20px;">Browse Products</a>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<h3>CampusHub</h3>
+					<p>Your trusted campus marketplace for students.</p>
+				</div>
+				<div class="col-md-3">
+					<h3>Support</h3>
+					<p>Universiti Teknologi Malaysia, Johor</p>
+					<p>hello@campushub.com</p>
+					<p>+60 12-345 6789</p>
+				</div>
+				<div class="col-md-3">
+					<h3>Account</h3>
+					<p><a href="userProfile.html">My Account</a></p>
+					<p><a href="cartDetails.html">Cart</a></p>
+					<p><a href="wishlist.html">Wishlist</a></p>
+				</div>
+				<div class="col-md-3">
+					<h3>Quick Links</h3>
+					<p><a href="#">Privacy Policy</a></p>
+					<p><a href="#">Terms of Use</a></p>
+					<p><a href="#">FAQ</a></p>
+				</div>
+			</div>
+			<p class="copyright text-center">
+				2024 CampusHub. All Rights Reserved.
+			</p>
+		</div>
+	</footer>
+
+</body>
+
+</html>

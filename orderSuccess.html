@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Order Successful - CampusHub</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style>
+		.success-icon {
+			width: 120px;
+			height: 120px;
+			background: #4CAF50;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 30px;
+			animation: scaleIn 0.5s ease-out;
+		}
+		.success-icon .glyphicon {
+			font-size: 60px;
+			color: white;
+		}
+		@keyframes scaleIn {
+			0% { transform: scale(0); }
+			50% { transform: scale(1.1); }
+			100% { transform: scale(1); }
+		}
+		.order-summary-card {
+			background: #f9f9f9;
+			border-radius: 8px;
+			padding: 20px;
+			margin-top: 30px;
+		}
+	</style>
+</head>
+
+<body class="page-wrapper">
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">CampusHub</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="userHome.html">Home</a></li>
+					<li><a href="categories.html">Categories</a></li>
+					<li><a href="sellerListings.html">My Listings</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="wishlist.html"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+					<li><a href="cartDetails.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+					<li><a href="messages.html"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span></a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span> Syahrul <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="userProfile.html">My Profile</a></li>
+							<li><a href="orderDetails.html">My Orders</a></li>
+							<li><a href="sellerListings.html">My Listings</a></li>
+							<li><a href="addProduct.html">Sell Item</a></li>
+							<li class="divider"></li>
+							<li><a href="index.html">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Main Content -->
+	<div class="main-content" style="margin-top: 80px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					
+					<!-- Success Icon -->
+					<div class="success-icon">
+						<span class="glyphicon glyphicon-ok"></span>
+					</div>
+
+					<h2 style="color: #4CAF50; margin-bottom: 10px;">Order Placed Successfully!</h2>
+					<p style="color: #666; font-size: 16px;">
+						Thank you for your purchase. Your order has been confirmed.
+					</p>
+
+					<!-- Order Details Card -->
+					<div class="order-summary-card text-left">
+						<h4 style="margin-top: 0; margin-bottom: 20px;">Order Summary</h4>
+						
+						<table class="table" style="margin-bottom: 0;">
+							<tr>
+								<td style="border: none; padding: 8px 0;"><strong>Order ID</strong></td>
+								<td style="border: none; padding: 8px 0; text-align: right;">#ORD-2024-001234</td>
+							</tr>
+							<tr>
+								<td style="border: none; padding: 8px 0;"><strong>Order Date</strong></td>
+								<td style="border: none; padding: 8px 0; text-align: right;">December 13, 2024</td>
+							</tr>
+							<tr>
+								<td style="border: none; padding: 8px 0;"><strong>Payment Method</strong></td>
+								<td style="border: none; padding: 8px 0; text-align: right;">Credit Card (****4242)</td>
+							</tr>
+							<tr>
+								<td style="border: none; padding: 8px 0;"><strong>Delivery Address</strong></td>
+								<td style="border: none; padding: 8px 0; text-align: right;">Kolej Tun Fatimah, UTM Skudai</td>
+							</tr>
+						</table>
+
+						<hr>
+
+						<!-- Order Items -->
+						<div style="display: flex; align-items: center; gap: 15px; padding: 10px 0;">
+							<img src="images/iPhone.webp" alt="iPhone" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+							<div style="flex: 1;">
+								<p style="margin: 0; font-weight: 500;">APPLE iPhone 13 Pro (128GB)</p>
+								<p style="margin: 0; color: #666; font-size: 12px;">Qty: 1 | Seller: Ahmad Faiz</p>
+							</div>
+							<p style="margin: 0; font-weight: 600; color: var(--primary);">RM 5,000.00</p>
+						</div>
+
+						<hr>
+
+						<table class="table" style="margin-bottom: 0;">
+							<tr>
+								<td style="border: none; padding: 8px 0;">Subtotal</td>
+								<td style="border: none; padding: 8px 0; text-align: right;">RM 5,000.00</td>
+							</tr>
+							<tr>
+								<td style="border: none; padding: 8px 0;">Delivery Fee</td>
+								<td style="border: none; padding: 8px 0; text-align: right;">RM 0.00</td>
+							</tr>
+							<tr>
+								<td style="border: none; padding: 8px 0;"><strong>Total</strong></td>
+								<td style="border: none; padding: 8px 0; text-align: right;"><strong style="color: var(--primary); font-size: 18px;">RM 5,000.00</strong></td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- Next Steps -->
+					<div class="alert alert-info text-left" style="margin-top: 30px;">
+						<h5 style="margin-top: 0;"><span class="glyphicon glyphicon-info-sign"></span> What's Next?</h5>
+						<ul style="margin-bottom: 0; padding-left: 20px;">
+							<li>The seller has been notified and will prepare your item</li>
+							<li>You can message the seller to arrange pickup or delivery</li>
+							<li>You will receive a notification when your order is shipped</li>
+						</ul>
+					</div>
+
+					<!-- Action Buttons -->
+					<div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center;">
+						<a href="orderDetails.html" class="btn btn-primary btn-lg">
+							<span class="glyphicon glyphicon-list-alt"></span> View My Orders
+						</a>
+						<a href="userHome.html" class="btn btn-default btn-lg">
+							Continue Shopping
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<h3>CampusHub</h3>
+					<p>Your trusted campus marketplace for students.</p>
+				</div>
+				<div class="col-md-3">
+					<h3>Support</h3>
+					<p>Universiti Teknologi Malaysia, Johor</p>
+					<p>hello@campushub.com</p>
+					<p>+60 12-345 6789</p>
+				</div>
+				<div class="col-md-3">
+					<h3>Account</h3>
+					<p><a href="userProfile.html">My Account</a></p>
+					<p><a href="cartDetails.html">Cart</a></p>
+					<p><a href="wishlist.html">Wishlist</a></p>
+				</div>
+				<div class="col-md-3">
+					<h3>Quick Links</h3>
+					<p><a href="#">Privacy Policy</a></p>
+					<p><a href="#">Terms of Use</a></p>
+					<p><a href="#">FAQ</a></p>
+				</div>
+			</div>
+			<p class="copyright text-center">
+				2024 CampusHub. All Rights Reserved.
+			</p>
+		</div>
+	</footer>
+
+</body>
+
+</html>

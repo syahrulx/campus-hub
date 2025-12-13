@@ -1,66 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>Shopping Cart - Navigation Guide</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/changes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<style>
-.page-card {
-	border: 2px solid #ddd;
-	border-radius: 8px;
-	padding: 15px;
-	margin-bottom: 15px;
-	background-color: white;
-	transition: all 0.3s;
-}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Shopping Cart - Navigation Guide</title>
 
-.page-card:hover {
-	border-color: #33cc33;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
 
-.page-card h4 {
-	color: #33cc33;
-	margin-top: 0;
-}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-.page-card a {
-	text-decoration: none;
-}
+	<style>
+		.page-card {
+			border: 2px solid #ddd;
+			border-radius: 8px;
+			padding: 15px;
+			margin-bottom: 15px;
+			background-color: white;
+			transition: all 0.3s;
+		}
 
-.section-header {
-	background-color: #33cc33;
-	color: white;
-	padding: 10px;
-	border-radius: 5px;
-	margin-top: 20px;
-	margin-bottom: 15px;
-}
-</style>
+		.page-card:hover {
+			border-color: #33cc33;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.page-card h4 {
+			color: #33cc33;
+			margin-top: 0;
+		}
+
+		.page-card a {
+			text-decoration: none;
+		}
+
+		.section-header {
+			background-color: #33cc33;
+			color: white;
+			padding: 10px;
+			border-radius: 5px;
+			margin-top: 20px;
+			margin-bottom: 15px;
+		}
+	</style>
 </head>
-<body >
+
+<body>
 
 	<div class="container" style="margin-top: 30px;">
-		<div class="jumbotron text-center"
-			style="background-color: #33cc33; color: white;">
+
+		<!-- Header Section -->
+		<div class="jumbotron text-center" style="background-color: #33cc33; color: white;">
 			<h1>Shopping Cart E-Commerce</h1>
 			<h3>HTML Structure Navigation Guide</h3>
 			<p>Click on any page below to view it</p>
 		</div>
 
-		<!-- Common Files Section -->
+		<!-- Common Files -->
 		<div class="section-header">
-			<h3>
-				<span class="glyphicon glyphicon-file"></span> Common Files
-			</h3>
+			<h3><span class="glyphicon glyphicon-file"></span> Common Files</h3>
 		</div>
+
 		<div class="row">
 			<div class="col-md-6">
 				<a href="header.html">
@@ -70,6 +72,7 @@
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-6">
 				<a href="footer.html">
 					<div class="page-card">
@@ -80,13 +83,14 @@
 			</div>
 		</div>
 
-		<!-- Public Pages Section -->
+		<!-- Public Pages -->
 		<div class="section-header">
 			<h3>
-				<span class="glyphicon glyphicon-globe"></span> Public Pages
-				(Unauthenticated)
+				<span class="glyphicon glyphicon-globe"></span>
+				Public Pages (Unauthenticated)
 			</h3>
 		</div>
+
 		<div class="row">
 			<div class="col-md-4">
 				<a href="index.html">
@@ -97,14 +101,16 @@
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-4">
 				<a href="login.html">
 					<div class="page-card">
 						<h4>Login</h4>
-						<p>User login form (Customer/Admin)</p>
+						<p>User login form</p>
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-4">
 				<a href="register.html">
 					<div class="page-card">
@@ -115,13 +121,14 @@
 			</div>
 		</div>
 
-		<!-- Customer Pages Section -->
+		<!-- Customer Pages -->
 		<div class="section-header">
 			<h3>
-				<span class="glyphicon glyphicon-user"></span> Customer Pages
-				(Authenticated)
+				<span class="glyphicon glyphicon-user"></span>
+				Customer Pages (Authenticated)
 			</h3>
 		</div>
+
 		<div class="row">
 			<div class="col-md-4">
 				<a href="userHome.html">
@@ -131,6 +138,7 @@
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-4">
 				<a href="cartDetails.html">
 					<div class="page-card">
@@ -139,6 +147,7 @@
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-4">
 				<a href="payment.html">
 					<div class="page-card">
@@ -148,6 +157,7 @@
 				</a>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-6">
 				<a href="orderDetails.html">
@@ -157,6 +167,7 @@
 					</div>
 				</a>
 			</div>
+
 			<div class="col-md-6">
 				<a href="userProfile.html">
 					<div class="page-card">
@@ -167,180 +178,64 @@
 			</div>
 		</div>
 
-		<!-- Admin Pages Section -->
+		<!-- Flow Section -->
 		<div class="section-header">
 			<h3>
-				<span class="glyphicon glyphicon-cog"></span> Admin Pages
-				(Administrator)
-			</h3>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<a href="adminHome.html">
-					<div class="page-card">
-						<h4>Admin Dashboard</h4>
-						<p>Main admin control panel</p>
-						<span class="label label-warning">ADMIN START</span>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="adminViewProduct.html">
-					<div class="page-card">
-						<h4>View Products</h4>
-						<p>View all products with management options</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="adminStock.html">
-					<div class="page-card">
-						<h4>Stock Management</h4>
-						<p>View and manage inventory levels</p>
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<a href="addProduct.html">
-					<div class="page-card">
-						<h4>Add Product</h4>
-						<p>Add new products to inventory</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="removeProduct.html">
-					<div class="page-card">
-						<h4>Remove Product</h4>
-						<p>Remove products from inventory</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="updateProductById.html">
-					<div class="page-card">
-						<h4>Update Product (Search)</h4>
-						<p>Search product by ID to update</p>
-					</div>
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<a href="updateProduct.html">
-					<div class="page-card">
-						<h4>Update Product (Form)</h4>
-						<p>Update product details form</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="shippedItems.html">
-					<div class="page-card">
-						<h4>Shipped Orders</h4>
-						<p>View all shipped orders</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4">
-				<a href="unshippedItems.html">
-					<div class="page-card">
-						<h4>Pending Orders</h4>
-						<p>View and ship pending orders</p>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		<!-- User Flow Diagrams -->
-		<div class="section-header">
-			<h3>
-				<span class="glyphicon glyphicon-random"></span> Recommended
-				Navigation Flows
+				<span class="glyphicon glyphicon-random"></span>
+				Recommended Navigation Flows
 			</h3>
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h4>Customer Journey</h4>
 					</div>
+
 					<div class="panel-body">
 						<ol>
 							<li><a href="index.html">Browse Products (index.html)</a></li>
-							<li><a href="login.html">Login (login.html)</a> or <a
-								href="register.html">Register (register.html)</a></li>
-							<li><a href="userHome.html">Customer Home (userHome.html)</a></li>
-							<li><a href="cartDetails.html">View Cart (cartDetails.html)</a></li>
-							<li><a href="payment.html">Make Payment (payment.html)</a></li>
-							<li><a href="orderDetails.html">View Orders
-									(orderDetails.html)</a></li>
-							<li><a href="userProfile.html">View Profile
-									(userProfile.html)</a></li>
-						</ol>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h4>Admin Journey</h4>
-					</div>
-					<div class="panel-body">
-						<ol>
-							<li><a href="login.html">Admin Login (login.html)</a></li>
-							<li><a href="adminHome.html">Admin Dashboard
-									(adminHome.html)</a></li>
-							<li><a href="adminStock.html">Manage Stock
-									(adminStock.html)</a></li>
-							<li><a href="addProduct.html">Add Product (addProduct.html)</a></li>
-							<li><a href="updateProductById.html">Update Product
-									(updateProductById.html)</a></li>
-							<li><a href="unshippedItems.html">Ship Orders
-									(unshippedItems.html)</a></li>
-							<li><a href="shippedItems.html">View Shipped
-									(shippedItems.html)</a></li>
+							<li><a href="login.html">Login</a> or <a href="register.html">Register</a></li>
+							<li><a href="userHome.html">Customer Home</a></li>
+							<li><a href="cartDetails.html">View Cart</a></li>
+							<li><a href="sellerListings.html">Seller Listings</a></li>
+							<li><a href="payment.html">Make Payment</a></li>
+							<li><a href="orderDetails.html">View Orders</a></li>
+							<li><a href="userProfile.html">View Profile</a></li>
 						</ol>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Information Panel -->
+		<!-- Important Notes -->
 		<div class="alert alert-info" style="margin-top: 30px;">
 			<h4>
-				<span class="glyphicon glyphicon-info-sign"></span> Important
-				Information
+				<span class="glyphicon glyphicon-info-sign"></span>
+				Important Information
 			</h4>
 			<ul>
-				<li><strong>Purpose:</strong> These are static HTML files for
-					demonstration and UI/UX review only</li>
-				<li><strong>Functionality:</strong> No backend functionality -
-					forms and buttons are non-functional</li>
-				<li><strong>Data:</strong> All data is hardcoded sample data</li>
-				<li><strong>Documentation:</strong> See <a href="README.md"
-					target="_blank">README.md</a> for complete details
+				<li><strong>Purpose:</strong> These are static HTML files for demonstration and UI/UX review only.</li>
+				<li><strong>Functionality:</strong> No backend functionality - forms and buttons are non-functional.
 				</li>
+				<li><strong>Data:</strong> All data is hardcoded sample data.</li>
+				<li><strong>Documentation:</strong> See <a href="README.md" target="_blank">README.md</a> for complete
+					details.</li>
 			</ul>
 		</div>
 
 		<!-- Footer -->
 		<div class="text-center" style="margin-top: 30px; margin-bottom: 30px;">
+			<p><strong>Total Pages:</strong> 9 HTML files</p>
 			<p>
-				<strong>Total Pages:</strong> 19 HTML files
-			</p>
-			<p>
-				<span class="glyphicon glyphicon-copyright-mark"></span> Shopping
-				Cart E-Commerce - Static HTML Demo
+				<span class="glyphicon glyphicon-copyright-mark"></span>
+				Shopping Cart E-Commerce - Static HTML Demo
 			</p>
 		</div>
 
 	</div>
 
 </body>
-</html>
 
+</html>

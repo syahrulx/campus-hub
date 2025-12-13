@@ -1,139 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin - Update Product Details</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/changes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Edit Listing - CampusHub</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body >
-
-	<!-- Admin Navigation FIRST (fixed positioning) -->
+<body class="page-wrapper">
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="adminHome.html"><span
-					class="glyphicon glyphicon-home">&nbsp;</span>Shopping Center</a>
+				<a class="navbar-brand" href="index.html">CampusHub</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="userHome.html">Home</a></li>
+					<li><a href="categories.html">Categories</a></li>
+					<li class="active"><a href="sellerListings.html">My Listings</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="adminHome.html">Admin Home</a></li>
-					<li><a href="adminStock.html">Stock</a></li>
-					<li><a href="shippedItems.html">Shipped Items</a></li>
-					<li><a href="unshippedItems.html">Orders to Ship</a></li>
-					<li><a href="index.html">Logout</a></li>
+					<li><a href="wishlist.html"><span class="glyphicon glyphicon-heart"></span></a></li>
+					<li><a href="cartDetails.html"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a href="messages.html"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span> Syahrul <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="userProfile.html">My Profile</a></li>
+							<li><a href="orderDetails.html">My Orders</a></li>
+							<li><a href="sellerListings.html">My Listings</a></li>
+							<li><a href="index.html">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<!-- Header SECOND (below fixed navbar) -->
-	<div class="container-fluid text-center"
-		style="">
-		<h2>CampusHub</h2>
-		<h6>Your Campus Marketplace</h6>
-	</div>
-
-	<div class="container">
-		<div class="row"
-			style="margin-top: 5px; margin-left: 2px; margin-right: 2px;">
-
-			<form action="#" method="post" enctype="multipart/form-data"
-				class="col-md-6 col-md-offset-3"
-				style="">
-				<div style="font-weight: bold;" class="text-center">
-					<h2 style="color: green;">Update Product Form</h2>
-				</div>
-				<div></div>
-				<input type="hidden" name="pid" value="P001">
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="name">Product Name</label> <input type="text"
-							placeholder="Enter Product Name" name="name" class="form-control"
-							id="name" value="APPLE iPhone 13 Pro" required>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="type">Product Type</label> <select name="type"
-							id="type" class="form-control" required>
-							<option value="mobile" selected>Mobile</option>
-							<option value="tv">TV</option>
-							<option value="laptop">Laptop</option>
-							<option value="camera">Camera</option>
-							<option value="speaker">Speaker</option>
-							<option value="tablet">Tablet</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="info">Product Description</label>
-						<textarea name="info" class="form-control" id="info"
-							placeholder="Enter Product Description" required>iPhone 13 boasts an advanced dual-camera system that allows you to click mesmerising pictures...</textarea>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="price">Product Price</label> <input type="number"
-							placeholder="Enter Product Price" name="price"
-							class="form-control" id="price" value="125999" required>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="quantity">Product Quantity</label> <input
-							type="number" placeholder="Enter Product Quantity"
-							name="quantity" class="form-control" id="quantity" value="200"
-							required>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group">
-						<label for="image">Product Image (Optional - Leave blank to
-							keep current image)</label> <input type="file" name="image"
-							class="form-control" id="image">
-					</div>
-				</div>
-				<div class="row text-center">
-					<div class="col-md-6" style="margin-bottom: 2px;">
-						<button type="button" onclick="window.location.href='adminHome.html'"
-							class="btn btn-danger">Cancel</button>
-					</div>
-					<div class="col-md-6">
-						<button type="submit" class="btn btn-success">Update Product</button>
-					</div>
-				</div>
-			</form>
-
-		</div>
-	</div>
-
-	<!-- Footer -->
-	<div class="container-fluid"
-		style="background-color: #454545; color: white; margin-top: 200px;">
+	<div class="main-content" style="margin-top: 80px;">
 		<div class="container">
-			<h3 class="text-center">Contact</h3>
-			<p class="text-center">
-				<em>We love our fans!</em>
-			</p>
-			<div class="row test">
-				<div class="col-md-4">
-					<p>
-						<span class="glyphicon glyphicon-copyright-mark"></span>
-						BitterCode - 2023
-					</p>
+			<div class="col-md-8 col-md-offset-2">
+				<h2 class="page-title">Edit Listing</h2>
+				
+				<!-- Current Item Info -->
+				<div class="alert alert-info">
+					<strong>Editing:</strong> iPhone 13 Pro (128GB) - Listed on Nov 20, 2025
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form action="sellerListings.html">
+							<div class="form-group">
+								<label>Product Name</label>
+								<input type="text" class="form-control" value="APPLE iPhone 13 Pro (128GB)" required>
+							</div>
+							<div class="form-group">
+								<label>Category</label>
+								<select class="form-control" required>
+									<option>Textbooks & Notes</option>
+									<option selected>Electronics</option>
+									<option>Clothing & Fashion</option>
+									<option>Dorm Items</option>
+									<option>Entertainment</option>
+									<option>Transportation</option>
+									<option>Stationery</option>
+									<option>Gaming</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Condition</label>
+								<select class="form-control" required>
+									<option>New</option>
+									<option selected>Like New</option>
+									<option>Good</option>
+									<option>Fair</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Description</label>
+								<textarea class="form-control" rows="4" required>Selling my iPhone 13 Pro 128GB in excellent condition. Bought last year, always used with a case and screen protector. Battery health at 92%. Comes with original box, charger, and a free case.</textarea>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Price (RM)</label>
+										<input type="number" class="form-control" value="5000" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Location</label>
+										<input type="text" class="form-control" value="UTM Skudai, Johor" required>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Product Images</label>
+								<div style="display: flex; gap: 10px; margin-bottom: 10px;">
+									<img src="images/iPhone.webp" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
+									<img src="images/profile.jpg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
+								</div>
+								<input type="file" class="form-control">
+								<p class="help-block">Upload new images to replace existing ones</p>
+							</div>
+							<hr>
+							<div style="display: flex; gap: 10px; justify-content: space-between;">
+								<a href="sellerListings.html" class="btn btn-default">Cancel</a>
+								<div>
+									<button type="button" class="btn btn-danger">Delete Listing</button>
+									<button type="submit" class="btn btn-primary">Save Changes</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<footer class="site-footer">
+		<div class="container">
+			<p class="copyright text-center">2024 CampusHub. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>
-

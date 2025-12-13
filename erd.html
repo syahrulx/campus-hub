@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CampusHub ERD - Entity Relationship Diagram</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<style>
+		.erd-container {
+			padding: 40px 20px;
+			background: #f5f5f5;
+			min-height: 100vh;
+		}
+		.erd-title {
+			text-align: center;
+			margin-bottom: 40px;
+		}
+		.erd-title h1 {
+			font-size: 32px;
+			font-weight: 600;
+			color: #333;
+		}
+		.erd-title p {
+			color: #666;
+		}
+		.entity-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 20px;
+			margin-bottom: 40px;
+		}
+		@media (max-width: 992px) {
+			.entity-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		@media (max-width: 576px) {
+			.entity-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+		.entity-card {
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			overflow: hidden;
+		}
+		.entity-header {
+			background: #DB4444;
+			color: white;
+			padding: 12px 16px;
+			font-weight: 600;
+			font-size: 16px;
+		}
+		.entity-header.category { background: #3498db; }
+		.entity-header.product { background: #27ae60; }
+		.entity-header.order { background: #9b59b6; }
+		.entity-header.cart { background: #f39c12; }
+		.entity-header.cart-item { background: #e67e22; }
+		.entity-header.review { background: #1abc9c; }
+		.entity-header.message { background: #34495e; }
+		.entity-body {
+			padding: 16px;
+		}
+		.attribute {
+			display: flex;
+			justify-content: space-between;
+			padding: 6px 0;
+			border-bottom: 1px solid #eee;
+			font-size: 13px;
+		}
+		.attribute:last-child {
+			border-bottom: none;
+		}
+		.attr-name {
+			font-weight: 500;
+			color: #333;
+		}
+		.attr-type {
+			color: #999;
+			font-size: 12px;
+		}
+		.attr-key {
+			background: #DB4444;
+			color: white;
+			font-size: 10px;
+			padding: 2px 6px;
+			border-radius: 3px;
+			margin-left: 5px;
+		}
+		.attr-key.fk {
+			background: #3498db;
+		}
+		.relationships-section {
+			background: white;
+			border-radius: 8px;
+			padding: 30px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			margin-bottom: 40px;
+		}
+		.rel-title {
+			font-size: 20px;
+			font-weight: 600;
+			margin-bottom: 20px;
+			padding-left: 16px;
+			border-left: 4px solid #DB4444;
+		}
+		.rel-table {
+			width: 100%;
+		}
+		.rel-table th {
+			background: #f5f5f5;
+			padding: 12px;
+			text-align: left;
+			font-weight: 600;
+		}
+		.rel-table td {
+			padding: 12px;
+			border-bottom: 1px solid #eee;
+		}
+		.cardinality {
+			font-weight: 600;
+			color: #DB4444;
+		}
+		.legend {
+			display: flex;
+			gap: 20px;
+			justify-content: center;
+			margin-bottom: 30px;
+			flex-wrap: wrap;
+		}
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 14px;
+		}
+		.legend-color {
+			width: 20px;
+			height: 20px;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="erd-container">
+	<div class="container">
+		<div class="erd-title">
+			<h1>CampusHub - Entity Relationship Diagram</h1>
+			<p>Crow's Foot Notation ERD - 8 Entities</p>
+		</div>
+
+		<!-- Legend -->
+		<div class="legend">
+			<div class="legend-item">
+				<div class="legend-color" style="background: #DB4444;"></div>
+				<span>USER</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #3498db;"></div>
+				<span>CATEGORY</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #27ae60;"></div>
+				<span>PRODUCT</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #9b59b6;"></div>
+				<span>ORDER</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #f39c12;"></div>
+				<span>CART</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #e67e22;"></div>
+				<span>CART_ITEM</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #1abc9c;"></div>
+				<span>REVIEW</span>
+			</div>
+			<div class="legend-item">
+				<div class="legend-color" style="background: #34495e;"></div>
+				<span>MESSAGE</span>
+			</div>
+		</div>
+
+		<!-- Entity Cards -->
+		<div class="entity-grid">
+			<!-- USER -->
+			<div class="entity-card">
+				<div class="entity-header">USER</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">user_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">name</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">email</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">password</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">phone</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">university</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">profile_image</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">created_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">rating</span>
+						<span class="attr-type">FLOAT</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- CATEGORY -->
+			<div class="entity-card">
+				<div class="entity-header category">CATEGORY</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">category_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">name</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">icon</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">item_count</span>
+						<span class="attr-type">INT</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- PRODUCT -->
+			<div class="entity-card">
+				<div class="entity-header product">PRODUCT</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">product_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">seller_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">category_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">name</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">description</span>
+						<span class="attr-type">TEXT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">price</span>
+						<span class="attr-type">DECIMAL</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">condition</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">status</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">image_url</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">listed_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- ORDER -->
+			<div class="entity-card">
+				<div class="entity-header order">ORDER</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">order_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">buyer_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">product_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">seller_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">quantity</span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">total_amount</span>
+						<span class="attr-type">DECIMAL</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">status</span>
+						<span class="attr-type">VARCHAR</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">ordered_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- CART -->
+			<div class="entity-card">
+				<div class="entity-header cart">CART</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">cart_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">user_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">created_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">updated_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- CART_ITEM -->
+			<div class="entity-card">
+				<div class="entity-header cart-item">CART_ITEM</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">cart_item_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">cart_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">product_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">quantity</span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">added_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- REVIEW -->
+			<div class="entity-card">
+				<div class="entity-header review">REVIEW</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">review_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">reviewer_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">seller_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">order_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">rating</span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">comment</span>
+						<span class="attr-type">TEXT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">created_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- MESSAGE -->
+			<div class="entity-card">
+				<div class="entity-header message">MESSAGE</div>
+				<div class="entity-body">
+					<div class="attribute">
+						<span class="attr-name">message_id <span class="attr-key">PK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">sender_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">receiver_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">product_id <span class="attr-key fk">FK</span></span>
+						<span class="attr-type">INT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">content</span>
+						<span class="attr-type">TEXT</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">is_read</span>
+						<span class="attr-type">BOOLEAN</span>
+					</div>
+					<div class="attribute">
+						<span class="attr-name">sent_at</span>
+						<span class="attr-type">DATETIME</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Relationships -->
+		<div class="relationships-section">
+			<h3 class="rel-title">Relationships (Crow's Foot Notation)</h3>
+			<table class="rel-table">
+				<thead>
+					<tr>
+						<th>Entity 1</th>
+						<th>Relationship</th>
+						<th>Entity 2</th>
+						<th>Cardinality</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>USER</td>
+						<td>sells</td>
+						<td>PRODUCT</td>
+						<td class="cardinality">1 : N</td>
+						<td>A user can sell many products</td>
+					</tr>
+					<tr>
+						<td>USER</td>
+						<td>places</td>
+						<td>ORDER</td>
+						<td class="cardinality">1 : N</td>
+						<td>A user can place many orders</td>
+					</tr>
+					<tr>
+						<td>USER</td>
+						<td>has</td>
+						<td>CART</td>
+						<td class="cardinality">1 : 1</td>
+						<td>Each user has one cart</td>
+					</tr>
+					<tr>
+						<td>USER</td>
+						<td>writes</td>
+						<td>REVIEW</td>
+						<td class="cardinality">1 : N</td>
+						<td>A user can write many reviews</td>
+					</tr>
+					<tr>
+						<td>USER</td>
+						<td>sends/receives</td>
+						<td>MESSAGE</td>
+						<td class="cardinality">1 : N</td>
+						<td>A user can send/receive many messages</td>
+					</tr>
+					<tr>
+						<td>CATEGORY</td>
+						<td>contains</td>
+						<td>PRODUCT</td>
+						<td class="cardinality">1 : N</td>
+						<td>A category contains many products</td>
+					</tr>
+					<tr>
+						<td>PRODUCT</td>
+						<td>ordered in</td>
+						<td>ORDER</td>
+						<td class="cardinality">1 : N</td>
+						<td>A product can be in many orders</td>
+					</tr>
+					<tr>
+						<td>PRODUCT</td>
+						<td>added to</td>
+						<td>CART_ITEM</td>
+						<td class="cardinality">1 : N</td>
+						<td>A product can be in many carts</td>
+					</tr>
+					<tr>
+						<td>CART</td>
+						<td>contains</td>
+						<td>CART_ITEM</td>
+						<td class="cardinality">1 : N</td>
+						<td>A cart contains many items</td>
+					</tr>
+					<tr>
+						<td>ORDER</td>
+						<td>has</td>
+						<td>REVIEW</td>
+						<td class="cardinality">1 : 0..1</td>
+						<td>An order may have one review</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+</body>
+</html>

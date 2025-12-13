@@ -1,161 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin - Unshipped Items</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/changes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Pending Orders - CampusHub</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body >
-
-	<!-- Admin Navigation FIRST (fixed positioning) -->
+<body class="page-wrapper">
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="adminHome.html"><span
-					class="glyphicon glyphicon-home">&nbsp;</span>Shopping Center</a>
+				<a class="navbar-brand" href="index.html">CampusHub</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="userHome.html">Home</a></li>
+					<li><a href="categories.html">Categories</a></li>
+					<li class="active"><a href="sellerListings.html">My Listings</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="adminHome.html">Admin Home</a></li>
-					<li><a href="adminStock.html">Stock</a></li>
-					<li><a href="shippedItems.html">Shipped Items</a></li>
-					<li><a href="unshippedItems.html">Orders to Ship</a></li>
-					<li><a href="index.html">Logout</a></li>
+					<li><a href="wishlist.html"><span class="glyphicon glyphicon-heart"></span></a></li>
+					<li><a href="cartDetails.html"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a href="messages.html"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span> Syahrul <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="userProfile.html">My Profile</a></li>
+							<li><a href="orderDetails.html">My Orders</a></li>
+							<li><a href="sellerListings.html">My Listings</a></li>
+							<li><a href="index.html">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<!-- Header SECOND (below fixed navbar) -->
-	<div class="container-fluid text-center"
-		style="">
-		<h2>CampusHub</h2>
-		<h6>Your Campus Marketplace</h6>
-	</div>
-
-	<div class="text-center"
-		style="color: green; font-size: 24px; font-weight: bold;">Pending Orders (To Ship)</div>
-
-	<!-- Start of Unshipped Items Table -->
-	<div class="container">
-
-		<table class="table table-hover">
-			<thead
-				style="">
-				<tr>
-					<th>Transaction ID</th>
-					<th>Product ID</th>
-					<th>Product Name</th>
-					<th>User Name</th>
-					<th>User Address</th>
-					<th>Quantity</th>
-					<th>Amount</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody
-				style="">
-
-				<!-- Sample Unshipped Item 1 -->
-				<tr>
-					<td>TXN002</td>
-					<td>P002</td>
-					<td>Samsung Galaxy S21 Ultra</td>
-					<td>John Doe</td>
-					<td>123 Main Street, Bangalore, Karnataka - 560001</td>
-					<td>2</td>
-					<td>199998.00</td>
-					<td style="color: blue;">ORDER_PLACED</td>
-					<td>
-						<form method="post" action="#">
-							<button type="submit" class="btn btn-success">SHIP NOW</button>
-						</form>
-					</td>
-				</tr>
-
-				<!-- Sample Unshipped Item 2 -->
-				<tr>
-					<td>TXN004</td>
-					<td>P006</td>
-					<td>JBL Flip 5 Bluetooth Speaker</td>
-					<td>Michael Brown</td>
-					<td>654 Hill Street, Pune, Maharashtra - 411001</td>
-					<td>1</td>
-					<td>8999.00</td>
-					<td style="color: blue;">ORDER_PLACED</td>
-					<td>
-						<form method="post" action="#">
-							<button type="submit" class="btn btn-success">SHIP NOW</button>
-						</form>
-					</td>
-				</tr>
-
-				<!-- Sample Unshipped Item 3 -->
-				<tr>
-					<td>TXN006</td>
-					<td>P005</td>
-					<td>MacBook Pro 16"</td>
-					<td>Sarah Wilson</td>
-					<td>987 Valley Road, Hyderabad, Telangana - 500001</td>
-					<td>1</td>
-					<td>199999.00</td>
-					<td style="color: blue;">ORDER_PLACED</td>
-					<td>
-						<form method="post" action="#">
-							<button type="submit" class="btn btn-success">SHIP NOW</button>
-						</form>
-					</td>
-				</tr>
-
-				<!-- Sample Unshipped Item 4 -->
-				<tr>
-					<td>TXN008</td>
-					<td>P007</td>
-					<td>iPad Pro 12.9"</td>
-					<td>David Martinez</td>
-					<td>147 Garden Lane, Kolkata, West Bengal - 700001</td>
-					<td>1</td>
-					<td>89999.00</td>
-					<td style="color: blue;">ORDER_PLACED</td>
-					<td>
-						<form method="post" action="#">
-							<button type="submit" class="btn btn-success">SHIP NOW</button>
-						</form>
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-	</div>
-	<!-- End of Unshipped Items Table -->
-
-	<!-- Footer -->
-	<div class="container-fluid"
-		style="background-color: #454545; color: white; margin-top: 200px;">
+	<div class="main-content" style="margin-top: 80px;">
 		<div class="container">
-			<h3 class="text-center">Contact</h3>
-			<p class="text-center">
-				<em>We love our fans!</em>
-			</p>
-			<div class="row test">
-				<div class="col-md-4">
-					<p>
-						<span class="glyphicon glyphicon-copyright-mark"></span>
-						BitterCode - 2023
-					</p>
+			<h2 class="page-title">Pending Orders to Ship</h2>
+			<p style="color: #666; margin-bottom: 20px;">Orders from buyers waiting to be shipped</p>
+
+			<!-- Tabs -->
+			<ul class="nav nav-tabs" style="margin-bottom: 20px;">
+				<li><a href="sellerListings.html">My Listings</a></li>
+				<li class="active"><a href="unshippedItems.html">Pending Orders</a></li>
+				<li><a href="shippedItems.html">Shipped Orders</a></li>
+			</ul>
+
+			<div class="panel panel-default">
+				<div class="panel-body" style="padding: 0;">
+					<table class="table table-hover" style="margin-bottom: 0;">
+						<thead>
+							<tr>
+								<th>Order ID</th>
+								<th>Product</th>
+								<th>Buyer</th>
+								<th>Amount</th>
+								<th>Order Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>#ORD-2024-001240</td>
+								<td>
+									<div style="display: flex; align-items: center; gap: 10px;">
+										<img src="images/speaker.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+										<span>JBL Flip 5 Speaker</span>
+									</div>
+								</td>
+								<td>Sarah Lim</td>
+								<td class="price">RM 280.00</td>
+								<td>Dec 13, 2024</td>
+								<td>
+									<a href="messages.html" class="btn btn-default btn-xs">Message</a>
+									<a href="shippedItems.html" class="btn btn-success btn-xs">Mark Shipped</a>
+								</td>
+							</tr>
+							<tr>
+								<td>#ORD-2024-001235</td>
+								<td>
+									<div style="display: flex; align-items: center; gap: 10px;">
+										<img src="images/profile.jpg" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+										<span>Calculus Textbook</span>
+									</div>
+								</td>
+								<td>Ahmad Hassan</td>
+								<td class="price">RM 45.00</td>
+								<td>Dec 12, 2024</td>
+								<td>
+									<a href="messages.html" class="btn btn-default btn-xs">Message</a>
+									<a href="shippedItems.html" class="btn btn-success btn-xs">Mark Shipped</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
+			</div>
+
+			<div class="alert alert-info">
+				<strong>Reminder:</strong> Please contact the buyer to arrange meetup or delivery before marking as shipped.
 			</div>
 		</div>
 	</div>
 
+	<footer class="site-footer">
+		<div class="container">
+			<p class="copyright text-center">2024 CampusHub. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>
-

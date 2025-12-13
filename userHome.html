@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Products - CampusHub</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/changes.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Products - CampusHub</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/changes.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+
 <body class="page-wrapper">
 
 	<!-- Navbar -->
@@ -26,15 +29,27 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="userHome.html">Home</a></li>
-					<li><a href="userHome.html">Products</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="categories.html">Categories</a></li>
+					<li><a href="sellerListings.html">My Listings</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="cartDetails.html">Cart <span class="badge">3</span></a></li>
-					<li><a href="orderDetails.html">Orders</a></li>
-					<li><a href="userProfile.html">Profile</a></li>
-					<li><a href="index.html">Logout</a></li>
+					<li><a href="wishlist.html"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+					<li><a href="cartDetails.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart <span class="badge">3</span></a></li>
+					<li><a href="messages.html"><span class="glyphicon glyphicon-envelope"></span></a></li>
+					<li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span></a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-user"></span> Syahrul <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="userProfile.html">My Profile</a></li>
+							<li><a href="orderDetails.html">My Orders</a></li>
+							<li><a href="sellerListings.html">My Listings</a></li>
+							<li><a href="addProduct.html">Sell Item</a></li>
+							<li class="divider"></li>
+							<li><a href="index.html">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -43,7 +58,7 @@
 	<!-- Header -->
 	<div class="container-fluid text-center">
 		<h2>Welcome Back!</h2>
-		<h6>Browse our latest products</h6>
+		<h6>Browse all the students products</h6>
 		<form class="form-inline" action="userHome.html" method="get">
 			<div class="input-group">
 				<input type="text" class="form-control" name="search" placeholder="What are you looking for?">
@@ -67,7 +82,7 @@
 				<!-- Product 1 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="iPhone 13 Pro">
+						<img src="images/iPhone.webp" alt="iPhone 13 Pro">
 						<div class="caption">
 							<p class="productname">APPLE iPhone 13 Pro</p>
 							<p class="productinfo">Advanced dual-camera system</p>
@@ -80,7 +95,7 @@
 				<!-- Product 2 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="Samsung Galaxy S21">
+						<img src="images/iPhone.webp" alt="Samsung Galaxy S21">
 						<div class="caption">
 							<p class="productname">Samsung Galaxy S21 Ultra</p>
 							<p class="productinfo">Ultimate smartphone experience</p>
@@ -93,7 +108,7 @@
 				<!-- Product 3 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="Sony Bravia TV">
+						<img src="images/macbook.jpg" alt="Sony Bravia TV">
 						<div class="caption">
 							<p class="productname">Sony Bravia 55" 4K TV</p>
 							<p class="productinfo">Stunning 4K picture quality</p>
@@ -106,7 +121,7 @@
 				<!-- Product 4 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="Dell XPS 15">
+						<img src="images/macbook.jpg" alt="Dell XPS 15">
 						<div class="caption">
 							<p class="productname">Dell XPS 15 Laptop</p>
 							<p class="productinfo">Powerful Intel i7 processor</p>
@@ -119,7 +134,7 @@
 				<!-- Product 5 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="Canon Camera">
+						<img src="images/airpods.png" alt="Canon Camera">
 						<div class="caption">
 							<p class="productname">Canon EOS 90D</p>
 							<p class="productinfo">Professional DSLR camera</p>
@@ -132,7 +147,7 @@
 				<!-- Product 6 -->
 				<div class="col-sm-4 col-md-3">
 					<div class="thumbnail">
-						<img src="images/profile.jpg" alt="JBL Speaker">
+						<img src="images/speaker.jpg" alt="JBL Speaker">
 						<div class="caption">
 							<p class="productname">JBL Flip 5 Speaker</p>
 							<p class="productinfo">Portable Bluetooth speaker</p>
@@ -172,4 +187,5 @@
 	</footer>
 
 </body>
+
 </html>
