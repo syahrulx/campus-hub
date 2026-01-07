@@ -1,145 +1,153 @@
 # 🎓 CampusHub - Student Marketplace
 
-A **Java JSP Web Application** for a campus-based marketplace application where students can buy and sell products within their university community.
+A **Java EE Web Application** for a campus-based marketplace where students can buy and sell products within their university community. Built with JSP, Servlets, Tailwind CSS, and Derby Database.
 
 ---
 
-## 📂 Project Structure
+## ✨ Features
+
+- 🔐 User authentication (Login/Register)
+- 🛍️ Browse products by categories
+- 🔍 Search functionality
+- 🛒 Shopping cart & checkout
+- 💳 Payment processing
+- 👤 User profiles
+- 📦 Seller dashboard (manage listings, orders)
+- 💬 Messaging system
+- 🔔 Notifications
+
+---
+
+## 🚀 Quick Setup
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/syahrulx/campus-hub.git
+```
+
+### 2. Copy Database
+
+Copy `setup/campus_db` folder to your Derby location:
+
+- **Mac/Linux**: `~/.netbeans-derby/`
+- **Windows**: `C:\Users\<YourName>\.netbeans-derby\`
+
+### 3. Open in NetBeans
+
+File → Open Project → Select `campus-hub` folder
+
+### 4. Start Derby Database
+
+Services tab → Java DB → Right-click → **Start Server**
+
+### 5. Run Project
+
+Right-click project → **Run**
+
+App opens at: `http://localhost:8080/campushub/`
+
+---
+
+## 🗄️ Database Details
+
+| Property | Value           |
+| -------- | --------------- |
+| Type     | Java DB (Derby) |
+| Name     | `campus_db`     |
+| User     | `app`           |
+| Password | `app`           |
+
+---
+
+## � Project Structure
 
 ```
-campusmarketplacehtml/
-├── src/                    # Java source code (Controllers, Models)
-├── WEB-INF/                # Web configuration (web.xml)
-├── css/                    # Stylesheets
-│   └── changes.css         # Main custom styles
-├── images/                 # Image assets
-├── index.jsp               # 🏠 Landing page
-└── [feature pages...]      # Individual JSP feature pages
+campus-hub/
+├── setup/
+│   ├── campus_db/              # Derby database files
+│   └── campus_db.sql           # SQL schema
+├── src/java/com/campushub/
+│   ├── bean/                   # Data models (User, Product, Cart)
+│   ├── servlet/                # Controllers (18 servlets)
+│   └── util/                   # DatabaseHelper
+├── web/
+│   ├── css/changes.css         # Global styles
+│   ├── images/                 # Assets
+│   ├── header.jsp              # Shared header
+│   ├── footer.jsp              # Shared footer
+│   └── *.jsp                   # View pages
+└── nbproject/                  # NetBeans config
 ```
 
 ---
 
-## 🚀 How to Run
+## 📄 Pages Overview
 
-1. Deploy the project to a servlet container (e.g., Apache Tomcat).
-2. Start the server.
-3. Open `http://localhost:8080/campusmarketplacehtml/` (or your configured context path) in a web browser.
-4. Navigate through the application using the links and buttons.
+### Authentication
 
----
+| Page                 | Description              |
+| -------------------- | ------------------------ |
+| `login.jsp`          | User login               |
+| `register.jsp`       | New account registration |
+| `forgotPassword.jsp` | Password recovery        |
 
-## 📄 Page Navigation Guide
+### Marketplace
 
-### 🔐 Authentication Flow
+| Page                | Description         |
+| ------------------- | ------------------- |
+| `userHome.jsp`      | User dashboard      |
+| `viewProducts.jsp`  | Browse all products |
+| `categories.jsp`    | Browse by category  |
+| `searchResults.jsp` | Search results      |
+| `productDetail.jsp` | Product details     |
 
-| Page                 | Description                         |
-| -------------------- | ----------------------------------- |
-| `index.jsp`          | Landing page with featured products |
-| `login.jsp`          | User login form                     |
-| `register.jsp`       | New user registration               |
-| `forgotPassword.jsp` | Password recovery                   |
+### Shopping
 
-### 🏠 User Dashboard
+| Page                    | Description          |
+| ----------------------- | -------------------- |
+| `cartDetails.jsp`       | Shopping cart        |
+| `payment.jsp`           | Checkout             |
+| `paymentProcessing.jsp` | Processing animation |
+| `orderSuccess.jsp`      | Order confirmation   |
+| `orderDetails.jsp`      | Order tracking       |
 
-| Page              | Description                   |
-| ----------------- | ----------------------------- |
-| `userHome.jsp`    | User's personalized home page |
-| `userProfile.jsp` | View user profile             |
-| `editProfile.jsp` | Edit profile information      |
+### Seller Dashboard
 
-### 🛍️ Shopping Experience
+| Page                 | Description       |
+| -------------------- | ----------------- |
+| `sellerListings.jsp` | My listings       |
+| `sellerOrders.jsp`   | Incoming orders   |
+| `addProduct.jsp`     | Add new product   |
+| `editProduct.jsp`    | Edit product      |
+| `shippedItems.jsp`   | Shipped orders    |
+| `unshippedItems.jsp` | Pending shipments |
 
-| Page                | Description                |
-| ------------------- | -------------------------- |
-| `categories.jsp`    | Browse product categories  |
-| `searchResults.jsp` | Product search results     |
-| `productDetail.jsp` | Individual product details |
-| `wishlist.jsp`      | User's saved items         |
+### Profile & Communication
 
-### 🛒 Cart & Checkout
-
-| Page               | Description        |
-| ------------------ | ------------------ |
-| `cartDetails.jsp`  | Shopping cart      |
-| `payment.jsp`      | Payment processing |
-| `orderSuccess.jsp` | Order confirmation |
-| `orderDetails.jsp` | Order details view |
-
-### 👤 Seller Features
-
-| Page                    | Description               |
-| ----------------------- | ------------------------- |
-| `sellerProfile.jsp`     | Seller's public profile   |
-| `sellerListings.jsp`    | Seller's product listings |
-| `addProduct.jsp`        | Add new product           |
-| `updateProduct.jsp`     | Update existing product   |
-| `updateProductById.jsp` | Update product by ID      |
-| `removeProduct.jsp`     | Remove product listing    |
-| `shippedItems.jsp`      | View shipped orders       |
-| `unshippedItems.jsp`    | Pending shipments         |
-
-### 💬 Communication
-
-| Page                | Description            |
-| ------------------- | ---------------------- |
-| `messages.jsp`      | Buyer-seller messaging |
-| `notifications.jsp` | User notifications     |
-
-### 🔧 Template Components
-
-| Page             | Description              |
-| ---------------- | ------------------------ |
-| `header.jsp`     | Reusable header template |
-| `footer.jsp`     | Reusable footer template |
-| `navigation.jsp` | Navigation component     |
+| Page                | Description   |
+| ------------------- | ------------- |
+| `userProfile.jsp`   | View profile  |
+| `editProfile.jsp`   | Edit profile  |
+| `messages.jsp`      | Chat system   |
+| `notifications.jsp` | Notifications |
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies
 
-- **Java (JSP & Servlets)** - Backend logic and dynamic content
-- **HTML5** - Page structure
-- **CSS3** - Custom styling (`css/changes.css`)
-- **Bootstrap 3.4.0** - Responsive grid & UI components
-- **jQuery 3.4.1** - JavaScript interactions
-- **Google Fonts (Poppins)** - Typography
-
----
-
-## 🎯 Recommended User Flow
-
-```
-1. index.jsp → Landing Page
-        ↓
-2. login.jsp → Login
-        ↓
-3. userHome.jsp → Dashboard
-        ↓
-4. categories.jsp → Browse
-        ↓
-5. productDetail.jsp → View Product
-        ↓
-6. cartDetails.jsp → Add to Cart
-        ↓
-7. payment.jsp → Checkout
-        ↓
-8. orderSuccess.jsp → Confirmation
-```
+- **Backend**: Java EE (JSP & Servlets)
+- **Database**: Apache Derby (Java DB)
+- **Frontend**: Tailwind CSS, Modern UI
+- **Server**: GlassFish 5
+- **IDE**: NetBeans
 
 ---
 
 ## 👨‍💻 Author
 
-**Syahrul**
+**Syahrul**  
 📧 syahrul@gmail.com
-
----
-
-## 📝 Notes for Lecturer
-
-- This project has been migrated from a static HTML storyboard to a **dynamic Java JSP Web Application**.
-- It requires a standard Java Web container (like Apache Tomcat) to run.
-- The interface preserves the original design while enabling backend logic integration.
 
 ---
 
