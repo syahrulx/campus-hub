@@ -172,14 +172,53 @@ public class EditProductServlet extends HttpServlet {
         }
     }
 
-    private void deleteProduct(String productId) {
-        String sql = "DELETE FROM APP.PRODUCT WHERE product_id = ?";
-        try (Connection conn = DatabaseHelper.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, productId);
-            pstmt.executeUpdate();
+    private boolean deleteProduct(String productId) {
+        String deleteCartItems = "DELETE FROM APP.CART_ITEM WHERE PRODUCT_ID = ?";
+        String deleteMessages = "DELETE FROM APP.MESSAGE WHERE PRODUCT_ID = ?";
+        String deleteOrders = "DELETE FROM APP.ORDERS WHERE PRODUCT_ID = ?";
+        String deleteProduct = "DELETE FROM APP.PRODUCT WHERE PRODUCT_ID = ?";
+
+        try (Connection conn = DatabaseHelper.getConnection()) {
+            // Disable auto-commit for transaction
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement psCart = conn.prepareStatement(deleteCartItems);
+                 PreparedStatement psMsg = conn.prepareStatement(deleteMessages);
+                 PreparedStatement psOrders = conn.prepareStatement(deleteOrders);
+                 PreparedStatement psProduct = conn.prepareStatement(deleteProduct)) {
+
+                // Delete from Cart_Item
+                psCart.setString(1, productId);
+                psCart.executeUpdate();
+
+                // Delete from Message
+                psMsg.setString(1, productId);
+                psMsg.executeUpdate();
+
+                // Delete from Orders
+                psOrders.setString(1, productId);
+                psOrders.executeUpdate();
+
+                // Finally, delete from Product
+                psProduct.setString(1, productId);
+                int rowsDeleted = psProduct.executeUpdate();
+
+                // Commit transaction
+                conn.commit();
+
+                return rowsDeleted > 0;
+
+            } catch (SQLException e) {
+                conn.rollback(); // Rollback if anything fails
+                e.printStackTrace();
+                return false;
+            } finally {
+                conn.setAutoCommit(true); // Restore default
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

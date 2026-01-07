@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <jsp:include page="header.jsp" />
 
 
@@ -22,20 +24,28 @@
 				<!-- Product Context Card -->
 				<div class="bg-gray-50 rounded-[2.5rem] p-6 mb-12 border border-gray-100 flex items-center gap-6 text-left">
 					<div class="w-20 h-20 rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-inner flex-shrink-0">
-						<img src="images/profile.jpg" alt="Product Preview" class="w-full h-full object-cover opacity-75 grayscale hover:grayscale-0 transition-all duration-500">
+						<img src="${product.imageUrl}" alt="${product.name}" class="w-full h-full object-cover opacity-75 grayscale hover:grayscale-0 transition-all duration-500">
 					</div>
 					<div class="min-w-0">
-						<h3 class="text-sm font-black text-gray-900 italic uppercase tracking-tight truncate mb-1">Calculus Textbook</h3>
-						<p class="text-[10px] font-black text-primary uppercase tracking-widest italic mb-1">RM 45.00</p>
-						<p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Listed Oct 15, 2025</p>
+						<h3 class="text-sm font-black text-gray-900 italic uppercase tracking-tight truncate mb-1">${product.name}</h3>
+						<p class="text-[10px] font-black text-primary uppercase tracking-widest italic mb-1">RM <fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></p>
+						<p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                    Listed <fmt:formatDate value="${product.listedAt}" pattern="MMM dd, yyyy"/>
+                                                </p>
+
 					</div>
 				</div>
 				
 				<!-- Action Systems -->
 				<div class="flex flex-col gap-4">
-					<a href="sellerListings.jsp" class="w-full py-5 bg-red-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-red-500/20 hover:bg-red-600 hover:shadow-red-600/30 transition-all transform active:scale-95 flex items-center justify-center gap-2">
-						Confirm Deletion
-					</a>
+					<form method="post" action="removeProduct">
+                                            <input type="hidden" name="productId" value="${product.productId}">
+                                            <button type="submit" 
+                                                class="w-full py-5 bg-red-500 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-red-500/20 hover:bg-red-600 hover:shadow-red-600/30 transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                                                Confirm Deletion
+                                            </button>
+                                        </form>
+
 					<a href="sellerListings.jsp" class="w-full py-5 bg-white text-gray-900 rounded-2xl font-black text-xs uppercase tracking-[0.2em] border-2 border-gray-100 hover:bg-gray-50 transition-all active:scale-95">
 						Cancel Protocol
 					</a>
