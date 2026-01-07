@@ -4,25 +4,25 @@
 
 	<!-- Main Content -->
 	<!-- Main Content -->
-	<div class="bg-transparent min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-		<div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+	<div class="bg-transparent min-h-[calc(100vh-80px)] flex items-center justify-center relative overflow-hidden py-8">
+		<div class="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 			<div class="flex flex-col lg:flex-row items-center gap-16">
 				
 				<!-- Branding Section -->
 				<div class="hidden lg:flex flex-1 flex-col items-center justify-center text-center">
-					<div class="relative mb-12 group">
-						<div class="absolute -inset-12 bg-primary/20 blur-[100px] rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-1000"></div>
-						<div class="relative w-40 h-40 bg-white border border-gray-100 rounded-[3rem] flex items-center justify-center shadow-2xl shadow-gray-200/50 transition-all duration-700">
-							<span class="text-primary text-6xl font-black italic select-none">CH</span>
+					<div class="relative mb-8 group">
+						<div class="absolute -inset-8 bg-primary/20 blur-[80px] rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-1000"></div>
+						<div class="relative w-32 h-32 bg-white border border-gray-100 rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-gray-200/50 transition-all duration-700">
+							<span class="text-primary text-5xl font-black italic select-none">CH</span>
 						</div>
 					</div>
 					<div class="relative">
-						<h1 class="text-7xl font-black text-gray-900 tracking-tighter italic uppercase mb-4">
+						<h1 class="text-5xl font-black text-gray-900 tracking-tighter italic uppercase mb-3">
 							Campus<span class="text-primary">Hub</span>
 						</h1>
-						<p class="text-gray-400 font-black tracking-[0.5em] uppercase text-xs">The Student Economy</p>
+						<p class="text-gray-400 font-black tracking-[0.4em] uppercase text-[10px]">The Student Economy</p>
 					</div>
-					<div class="mt-16 max-w-sm">
+					<div class="mt-10 max-w-xs">
 						<p class="text-sm text-gray-400 font-medium leading-relaxed italic">
 							"Empowering student entrepreneurs and buyers with a secure, centralized campus marketplace."
 						</p>
