@@ -19,7 +19,22 @@
 					Enter your registered university email below to initiate the recovery protocol.
 				</p>
 
-				<form action="login.jsp" method="get" class="space-y-6">
+				<!-- Success/Error Messages -->
+				<c:if test="${not empty successMessage}">
+					<div class="mb-6 p-4 rounded-xl bg-green-50 border border-green-100 text-green-700 text-sm font-bold">
+						${successMessage}
+					</div>
+					<div class="mb-6 text-center">
+						<a href="login.jsp" class="text-primary font-bold hover:underline">Go to Login</a>
+					</div>
+				</c:if>
+				<c:if test="${not empty errorMessage}">
+					<div class="mb-6 p-4 rounded-xl bg-red-50 border border-red-100 text-red-700 text-sm font-bold">
+						${errorMessage}
+					</div>
+				</c:if>
+
+				<form action="forgotPassword" method="POST" class="space-y-6">
 					<div class="relative group">
 						<label class="absolute -top-2.5 left-4 px-2 bg-white text-[10px] font-black text-gray-400 group-focus-within:text-primary transition-colors uppercase tracking-widest">Protocol Email</label>
 						<input type="email" name="email" required placeholder="syahrul@student.utm.my"

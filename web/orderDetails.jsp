@@ -86,7 +86,7 @@
 										<div class="flex flex-col items-center sm:items-end gap-3 flex-shrink-0 pt-6 sm:pt-0 border-t sm:border-t-0 border-gray-50 w-full sm:w-auto">
 											<p class="text-2xl font-black text-gray-900 italic">RM <fmt:formatNumber value="${order[3]}" pattern="#,##0.00"/></p>
 											<div class="flex gap-2">
-												<a href="productDetail?id=${order[0]}" class="px-6 py-2 bg-gray-50 text-gray-900 rounded-xl font-black text-[10px] uppercase tracking-widest border border-gray-100 hover:bg-white hover:shadow-lg transition-all active:scale-95">
+												<a href="orderDetail?id=${order[0]}" class="px-6 py-2 bg-gray-50 text-gray-900 rounded-xl font-black text-[10px] uppercase tracking-widest border border-gray-100 hover:bg-white hover:shadow-lg transition-all active:scale-95">
 													Details
 												</a>
 												<c:if test="${order[4] == 'COMPLETED'}">

@@ -25,6 +25,12 @@
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
+<%
+    String paymentMethod = request.getParameter("paymentMethod");
+    String paymentId = request.getParameter("paymentId");
+    if (paymentMethod == null) paymentMethod = "Card";
+    if (paymentId == null) paymentId = "TXN-" + System.currentTimeMillis();
+%>
 <body class="bg-[#1a1a2e] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900 via-dark to-black min-h-screen flex items-center justify-center p-4">
     
     <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden max-w-md w-full relative group">
@@ -137,10 +143,13 @@
             successState.classList.remove('hidden');
         }, 4000);
 
-        // Redirect
+        // Redirect via POST to trigger order creation
         setTimeout(() => {
-            window.location.href = 'checkout';
+            document.getElementById('checkoutForm').submit();
         }, 5800);
     </script>
+    
+    <!-- Hidden form for POST redirect -->
+    <form id="checkoutForm" action="checkout" method="POST" style="display:none;"></form>
 </body>
 </html>
