@@ -1,0 +1,653 @@
+/* ========================================
+   MODERN E-COMMERCE UI/UX STYLES
+   Clean, Professional, Minimalist Design
+   ======================================== */
+
+/* ========== ROOT VARIABLES ========== */
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1e40af;
+    --primary-light: #3b82f6;
+    --secondary-color: #10b981;
+    --secondary-dark: #059669;
+    --accent-color: #f59e0b;
+    --danger-color: #ef4444;
+    --danger-dark: #dc2626;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-tertiary: #f3f4f6;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== GLOBAL STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== NAVBAR STYLES ========== */
+.navbar {
+    background-color: var(--bg-primary) !important;
+    border: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 0 !important;
+    min-height: 70px;
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: var(--primary-color) !important;
+    letter-spacing: -0.5px;
+    padding: 15px 20px !important;
+}
+
+.navbar-brand:hover {
+    color: var(--primary-dark) !important;
+}
+
+.navbar-nav > li > a {
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    padding: 20px 18px !important;
+    letter-spacing: 0;
+    transition: var(--transition);
+}
+
+.navbar-nav > li > a:hover {
+    color: var(--primary-color) !important;
+    background-color: var(--bg-tertiary) !important;
+}
+
+.navbar-nav > li.active > a {
+    color: var(--primary-color) !important;
+    background-color: var(--bg-tertiary) !important;
+}
+
+.navbar-toggle {
+    border-color: var(--border-color) !important;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: var(--text-primary) !important;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+.dropdown-menu > li > a {
+    color: var(--text-primary) !important;
+    padding: 10px 20px !important;
+    font-size: 0.95rem !important;
+    transition: var(--transition);
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--primary-color) !important;
+}
+
+/* ========== HEADER STYLES ========== */
+.container-fluid.text-center {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: white !important;
+    padding: 2.5rem 1rem !important;
+    margin-top: 70px !important;
+    border: none !important;
+    box-shadow: var(--shadow-md);
+}
+
+.container-fluid.text-center h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.container-fluid.text-center h6 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+}
+
+/* ========== BUTTON STYLES ========== */
+.btn {
+    border-radius: var(--radius-md) !important;
+    font-weight: 600 !important;
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.95rem !important;
+    transition: var(--transition) !important;
+    border: none !important;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+.btn-success {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+}
+
+.btn-success:hover {
+    background-color: var(--secondary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+.btn-danger {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+.btn-warning {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+}
+
+.btn-warning:hover {
+    background-color: #d97706 !important;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md) !important;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ========== FORM STYLES ========== */
+.form-control {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem !important;
+    transition: var(--transition) !important;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+    outline: none !important;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    display: block;
+}
+
+form {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 2rem !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* ========== CARD/PANEL STYLES ========== */
+.panel {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+    background-color: var(--bg-primary) !important;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.panel:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-2px);
+}
+
+.panel-heading {
+    background-color: var(--bg-tertiary) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 1rem 1.25rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.panel-body {
+    padding: 1.5rem !important;
+}
+
+.panel-primary > .panel-heading {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.panel-success > .panel-heading {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.panel-warning > .panel-heading {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.panel-danger > .panel-heading {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* ========== PRODUCT CARD STYLES ========== */
+.thumbnail {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 1rem !important;
+    background-color: var(--bg-primary) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition) !important;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.thumbnail:hover {
+    box-shadow: var(--shadow-lg) !important;
+    transform: translateY(-4px);
+    border-color: var(--primary-color) !important;
+}
+
+.thumbnail img {
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.productname {
+    color: var(--text-primary) !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem;
+    font-family: inherit !important;
+    line-height: 1.4;
+}
+
+.productinfo {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.price {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+/* ========== TABLE STYLES ========== */
+.table {
+    background-color: var(--bg-primary) !important;
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm) !important;
+    margin-bottom: 2rem;
+}
+
+.table thead {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.table thead th {
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding: 1rem !important;
+    border: none !important;
+    letter-spacing: 0.3px;
+}
+
+.table tbody tr {
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.table tbody tr:hover {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.table tbody td {
+    padding: 1rem !important;
+    vertical-align: middle !important;
+    color: var(--text-primary) !important;
+    font-size: 0.95rem;
+}
+
+.table-hover tbody tr:last-child {
+    border-bottom: none !important;
+}
+
+/* ========== JUMBOTRON STYLES ========== */
+.jumbotron {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: white !important;
+    border-radius: var(--radius-xl) !important;
+    padding: 3rem 2rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: var(--shadow-lg) !important;
+    border: none !important;
+}
+
+.jumbotron h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.jumbotron h3 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.jumbotron p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* ========== ALERT STYLES ========== */
+.alert {
+    border-radius: var(--radius-md) !important;
+    border: none !important;
+    padding: 1rem 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.alert-info {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+}
+
+.alert-success {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+.alert-warning {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.alert-danger {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+}
+
+/* ========== BADGE STYLES ========== */
+.badge {
+    background-color: var(--danger-color) !important;
+    border-radius: 50% !important;
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    min-width: 1.5rem;
+    text-align: center;
+}
+
+.label {
+    border-radius: var(--radius-sm) !important;
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+}
+
+.label-success {
+    background-color: var(--secondary-color) !important;
+}
+
+.label-warning {
+    background-color: var(--accent-color) !important;
+}
+
+.label-danger {
+    background-color: var(--danger-color) !important;
+}
+
+.label-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* ========== FOOTER STYLES ========== */
+.container-fluid[style*="background-color: #454545"] {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+    color: white !important;
+    padding: 3rem 0 2rem 0 !important;
+    margin-top: 4rem !important;
+    border-top: 1px solid var(--border-color);
+}
+
+.container-fluid[style*="background-color: #454545"] h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.container-fluid[style*="background-color: #454545"] p {
+    opacity: 0.9;
+}
+
+/* ========== UTILITY CLASSES ========== */
+.text-center {
+    text-align: center !important;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* ========== CUSTOM PAGE CARD (Navigation Page) ========== */
+.page-card {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    background-color: var(--bg-primary) !important;
+    transition: var(--transition) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.page-card:hover {
+    border-color: var(--primary-color) !important;
+    box-shadow: var(--shadow-lg) !important;
+    transform: translateY(-3px);
+}
+
+.page-card h4 {
+    color: var(--primary-color) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.75rem !important;
+    font-weight: 600 !important;
+}
+
+.page-card p {
+    color: var(--text-secondary) !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.95rem;
+}
+
+.page-card a {
+    text-decoration: none !important;
+}
+
+.section-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    color: white !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: var(--radius-lg) !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.section-header h3 {
+    margin: 0 !important;
+    font-weight: 600 !important;
+    font-size: 1.5rem;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    .container-fluid.text-center h2 {
+        font-size: 1.5rem;
+    }
+
+    .container-fluid.text-center h6 {
+        font-size: 0.9rem;
+    }
+
+    .jumbotron {
+        padding: 2rem 1rem !important;
+    }
+
+    .jumbotron h1 {
+        font-size: 2rem;
+    }
+
+    .panel-body {
+        padding: 1rem !important;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.thumbnail,
+.panel,
+.page-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ========== SCROLLBAR STYLES ========== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-light);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* ========== SPACING UTILITIES ========== */
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* ========== FOCUS STATES ========== */
+a:focus,
+button:focus,
+.btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+    .navbar,
+    .btn,
+    footer {
+        display: none !important;
+    }
+}
