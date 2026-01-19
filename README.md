@@ -14,7 +14,7 @@ A **Java EE Web Application** for a campus-based marketplace where students can 
 - 👤 User profiles
 - 📦 Seller dashboard (manage listings, orders)
 - 💬 Messaging system
-- 🔔 Notifications
+- 👤 Seller public profiles
 
 ---
 
@@ -125,12 +125,12 @@ campus-hub/
 
 ### Profile & Communication
 
-| Page                | Description   |
-| ------------------- | ------------- |
-| `userProfile.jsp`   | View profile  |
-| `editProfile.jsp`   | Edit profile  |
-| `messages.jsp`      | Chat system   |
-| `notifications.jsp` | Notifications |
+| Page                | Description           |
+| ------------------- | --------------------- |
+| `userProfile.jsp`   | View profile          |
+| `editProfile.jsp`   | Edit profile          |
+| `sellerProfile.jsp` | Seller public profile |
+| `messages.jsp`      | Chat system           |
 
 ---
 

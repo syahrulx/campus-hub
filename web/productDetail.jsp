@@ -120,23 +120,23 @@
 						</c:if>
 
 						<!-- Seller Premium Card -->
-						<c:if test="${seller != null}">
-							<div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 relative group overflow-hidden">
-								<div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-full -mr-16 -mt-16 group-hover:bg-primary/5 transition-colors duration-500"></div>
-								<div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-red-100">
-									${seller.name.substring(0,1).toUpperCase()}
-								</div>
-								<div class="flex-grow">
-									<h4 class="text-xl font-black text-gray-900 leading-tight">${seller.name}</h4>
-									<p class="text-sm font-medium text-gray-400 mt-1">${seller.university}</p>
-								</div>
-								<div class="flex-shrink-0">
-									<div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-300 group-hover:text-primary transition-colors">
-										<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l5-5z" clip-rule="evenodd"></path></svg>
-									</div>
+					<c:if test="${seller != null}">
+						<a href="seller?id=${product.sellerId}" class="block bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 relative group overflow-hidden hover:border-primary/20 hover:shadow-lg transition-all">
+							<div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-full -mr-16 -mt-16 group-hover:bg-primary/5 transition-colors duration-500"></div>
+							<div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-red-100">
+								${seller.name.substring(0,1).toUpperCase()}
+							</div>
+							<div class="flex-grow">
+								<h4 class="text-xl font-black text-gray-900 leading-tight group-hover:text-primary transition-colors">${seller.name}</h4>
+								<p class="text-sm font-medium text-gray-400 mt-1">${seller.university}</p>
+							</div>
+							<div class="flex-shrink-0">
+								<div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-300 group-hover:text-primary group-hover:bg-primary/10 transition-all">
+									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
 								</div>
 							</div>
-						</c:if>
+						</a>
+					</c:if>
 					</div>
 				</div>
 			</div>
