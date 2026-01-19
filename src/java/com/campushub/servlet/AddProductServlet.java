@@ -67,25 +67,24 @@ public class AddProductServlet extends HttpServlet {
         String categoryId = request.getParameter("categoryId");
         String condition = request.getParameter("condition");
 
-        // Handle file upload
+        // Handle file upload - convert to Base64 data URI
         String imageUrl = "images/product-placeholder.png";
         Part filePart = request.getPart("imageFile");
         if (filePart != null && filePart.getSize() > 0) {
-            String fileName = UUID.randomUUID().toString() + getFileExtension(filePart);
-            String uploadPath = getServletContext().getRealPath("/uploads");
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
             try (InputStream input = filePart.getInputStream()) {
-                Files.copy(input, Paths.get(uploadPath, fileName), StandardCopyOption.REPLACE_EXISTING);
-                imageUrl = "uploads/" + fileName;
-            }
-        } else {
-            // Fallback to URL if provided
-            String imageUrlParam = request.getParameter("imageUrl");
-            if (imageUrlParam != null && !imageUrlParam.trim().isEmpty()) {
-                imageUrl = imageUrlParam;
+                java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = input.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                byte[] imageBytes = buffer.toByteArray();
+                String base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
+                String mimeType = filePart.getContentType();
+                if (mimeType == null) {
+                    mimeType = "image/jpeg";
+                }
+                imageUrl = "data:" + mimeType + ";base64," + base64Image;
             }
         }
 

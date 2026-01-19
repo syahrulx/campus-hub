@@ -13,10 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.annotation.MultipartConfig;
 import com.campushub.bean.Product;
 import com.campushub.util.DatabaseHelper;
 
 @WebServlet("/editProduct")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
+        maxFileSize = 1024 * 1024 * 5, // 5 MB
+        maxRequestSize = 1024 * 1024 * 10 // 10 MB
+)
 public class EditProductServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -82,7 +87,26 @@ public class EditProductServlet extends HttpServlet {
             String priceStr = request.getParameter("price");
             String categoryId = request.getParameter("categoryId");
             String condition = request.getParameter("condition");
-            String imageUrl = request.getParameter("imageUrl");
+
+            String imageUrl = existing.getImageUrl();
+            javax.servlet.http.Part filePart = request.getPart("imageFile");
+            if (filePart != null && filePart.getSize() > 0) {
+                try (java.io.InputStream input = filePart.getInputStream()) {
+                    java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
+                    int nRead;
+                    byte[] data = new byte[16384];
+                    while ((nRead = input.read(data, 0, data.length)) != -1) {
+                        buffer.write(data, 0, nRead);
+                    }
+                    byte[] imageBytes = buffer.toByteArray();
+                    String base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = filePart.getContentType();
+                    if (mimeType == null) {
+                        mimeType = "image/jpeg";
+                    }
+                    imageUrl = "data:" + mimeType + ";base64," + base64Image;
+                }
+            }
 
             double price;
             try {
@@ -93,10 +117,6 @@ public class EditProductServlet extends HttpServlet {
                 request.setAttribute("categories", getCategories());
                 request.getRequestDispatcher("/editProduct.jsp").forward(request, response);
                 return;
-            }
-
-            if (imageUrl == null || imageUrl.trim().isEmpty()) {
-                imageUrl = existing.getImageUrl();
             }
 
             boolean success = updateProduct(productId, categoryId, name, description, price, condition, imageUrl);
@@ -183,9 +203,9 @@ public class EditProductServlet extends HttpServlet {
             conn.setAutoCommit(false);
 
             try (PreparedStatement psCart = conn.prepareStatement(deleteCartItems);
-                 PreparedStatement psMsg = conn.prepareStatement(deleteMessages);
-                 PreparedStatement psOrders = conn.prepareStatement(deleteOrders);
-                 PreparedStatement psProduct = conn.prepareStatement(deleteProduct)) {
+                    PreparedStatement psMsg = conn.prepareStatement(deleteMessages);
+                    PreparedStatement psOrders = conn.prepareStatement(deleteOrders);
+                    PreparedStatement psProduct = conn.prepareStatement(deleteProduct)) {
 
                 // Delete from Cart_Item
                 psCart.setString(1, productId);

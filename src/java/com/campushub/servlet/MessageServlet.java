@@ -34,30 +34,37 @@ public class MessageServlet extends HttpServlet {
 
         String userId = (String) session.getAttribute("userId");
         String conversationWith = request.getParameter("with");
+        String productId = request.getParameter("productId");
 
         // Get all conversations for this user
         List<Map<String, Object>> conversations = getConversations(userId);
         request.setAttribute("conversations", conversations);
 
         // If a specific conversation is selected, load messages
-        if (conversationWith != null && !conversationWith.isEmpty()) {
-            List<Map<String, Object>> messages = getMessages(userId, conversationWith);
+        if (conversationWith != null && !conversationWith.isEmpty() && productId != null && !productId.isEmpty()) {
+            List<Map<String, Object>> messages = getMessages(userId, conversationWith, productId);
             Map<String, Object> otherUser = getUserInfo(conversationWith);
             request.setAttribute("messages", messages);
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", conversationWith);
+            request.setAttribute("currentProductId", productId);
 
             // Mark messages as read
-            markAsRead(userId, conversationWith);
+            markAsRead(userId, conversationWith, productId);
         } else if (!conversations.isEmpty()) {
             // Default to first conversation
-            String firstConvoId = (String) conversations.get(0).get("userId");
-            List<Map<String, Object>> messages = getMessages(userId, firstConvoId);
+            Map<String, Object> firstConvo = conversations.get(0);
+            String firstConvoId = (String) firstConvo.get("userId");
+            String firstProductId = (String) firstConvo.get("productId");
+
+            List<Map<String, Object>> messages = getMessages(userId, firstConvoId, firstProductId);
             Map<String, Object> otherUser = getUserInfo(firstConvoId);
             request.setAttribute("messages", messages);
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", firstConvoId);
-            markAsRead(userId, firstConvoId);
+            request.setAttribute("currentProductId", firstProductId);
+
+            markAsRead(userId, firstConvoId, firstProductId);
         }
 
         request.getRequestDispatcher("/messages.jsp").forward(request, response);
@@ -82,13 +89,14 @@ public class MessageServlet extends HttpServlet {
             sendMessage(senderId, receiverId, content, productId);
         }
 
-        response.sendRedirect("messages?with=" + receiverId);
+        response.sendRedirect("messages?with=" + receiverId + "&productId=" + productId);
     }
 
     private List<Map<String, Object>> getConversations(String userId) {
         List<Map<String, Object>> conversations = new ArrayList<>();
-        // Get unique users this user has conversed with
+        // Get unique users AND products this user has conversed with
         String sql = "SELECT DISTINCT " +
+                "m.product_id, p.name as product_name, " +
                 "CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END as other_user_id, " +
                 "u.name as other_user_name, " +
                 "(SELECT content FROM APP.MESSAGE m2 WHERE " +
@@ -96,12 +104,14 @@ public class MessageServlet extends HttpServlet {
                 +
                 "   (m2.receiver_id = ? AND m2.sender_id = CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END)) "
                 +
+                "  AND m2.product_id = m.product_id " +
                 "  ORDER BY m2.sent_at DESC FETCH FIRST 1 ROW ONLY) as last_message, " +
                 "(SELECT COUNT(*) FROM APP.MESSAGE m3 WHERE m3.sender_id = CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END "
                 +
-                "  AND m3.receiver_id = ? AND m3.is_read = false) as unread_count " +
+                "  AND m3.receiver_id = ? AND m3.is_read = false AND m3.product_id = m.product_id) as unread_count " +
                 "FROM APP.MESSAGE m " +
                 "JOIN APP.USERS u ON u.user_id = CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END " +
+                "JOIN APP.PRODUCT p ON m.product_id = p.product_id " +
                 "WHERE m.sender_id = ? OR m.receiver_id = ? " +
                 "ORDER BY unread_count DESC";
 
@@ -122,6 +132,8 @@ public class MessageServlet extends HttpServlet {
                     Map<String, Object> convo = new HashMap<>();
                     convo.put("userId", rs.getString("other_user_id"));
                     convo.put("userName", rs.getString("other_user_name"));
+                    convo.put("productId", rs.getString("product_id"));
+                    convo.put("productName", rs.getString("product_name"));
                     convo.put("lastMessage", rs.getString("last_message"));
                     convo.put("unreadCount", rs.getInt("unread_count"));
                     conversations.add(convo);
@@ -133,11 +145,12 @@ public class MessageServlet extends HttpServlet {
         return conversations;
     }
 
-    private List<Map<String, Object>> getMessages(String userId, String otherUserId) {
+    private List<Map<String, Object>> getMessages(String userId, String otherUserId, String productId) {
         List<Map<String, Object>> messages = new ArrayList<>();
         String sql = "SELECT m.*, u.name as sender_name FROM APP.MESSAGE m " +
                 "JOIN APP.USERS u ON m.sender_id = u.user_id " +
-                "WHERE (m.sender_id = ? AND m.receiver_id = ?) OR (m.sender_id = ? AND m.receiver_id = ?) " +
+                "WHERE ((m.sender_id = ? AND m.receiver_id = ?) OR (m.sender_id = ? AND m.receiver_id = ?)) " +
+                "AND m.product_id = ? " +
                 "ORDER BY m.sent_at ASC";
 
         try (Connection conn = DatabaseHelper.getConnection();
@@ -146,6 +159,7 @@ public class MessageServlet extends HttpServlet {
             pstmt.setString(2, otherUserId);
             pstmt.setString(3, otherUserId);
             pstmt.setString(4, userId);
+            pstmt.setString(5, productId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Map<String, Object> msg = new HashMap<>();
@@ -197,12 +211,13 @@ public class MessageServlet extends HttpServlet {
         }
     }
 
-    private void markAsRead(String receiverId, String senderId) {
-        String sql = "UPDATE APP.MESSAGE SET is_read = true WHERE receiver_id = ? AND sender_id = ?";
+    private void markAsRead(String receiverId, String senderId, String productId) {
+        String sql = "UPDATE APP.MESSAGE SET is_read = true WHERE receiver_id = ? AND sender_id = ? AND product_id = ?";
         try (Connection conn = DatabaseHelper.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, receiverId);
             pstmt.setString(2, senderId);
+            pstmt.setString(3, productId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -46,8 +46,8 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="convo" items="${conversations}">
-									<a href="messages?with=${convo.userId}" class="block transition-all ${convo.userId == chatWithId ? 'bg-red-50/50 relative' : 'hover:bg-gray-50'}">
-										<c:if test="${convo.userId == chatWithId}">
+									<a href="messages?with=${convo.userId}&productId=${convo.productId}" class="block transition-all ${convo.userId == chatWithId && convo.productId == currentProductId ? 'bg-red-50/50 relative' : 'hover:bg-gray-50'}">
+										<c:if test="${convo.userId == chatWithId && convo.productId == currentProductId}">
 											<div class="absolute inset-y-0 left-0 w-1 bg-primary"></div>
 										</c:if>
 										<div class="p-5 flex items-center gap-4">
@@ -61,6 +61,7 @@
 														<span class="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full">${convo.unreadCount}</span>
 													</c:if>
 												</div>
+												<p class="text-[10px] font-bold text-primary uppercase tracking-wider mb-1">${convo.productName}</p>
 												<p class="text-xs text-gray-400 font-medium truncate">${convo.lastMessage}</p>
 											</div>
 										</div>
@@ -130,6 +131,7 @@
 							<div class="p-8 border-t border-gray-100 bg-white">
 								<form action="messages" method="POST" class="relative group">
 									<input type="hidden" name="receiverId" value="${chatWithId}">
+									<input type="hidden" name="productId" value="${currentProductId}">
 									<input type="text" name="content" required placeholder="Write a message..." autocomplete="off"
 										class="w-full bg-gray-50 border-2 border-gray-50 focus:border-primary px-8 py-5 rounded-[2rem] font-medium text-sm transition-all shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/5 pr-24 placeholder:text-gray-300">
 									<button type="submit" class="absolute right-3 top-3 bottom-3 px-6 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-red-900/20 hover:scale-[1.02] transition-all active:scale-95 flex items-center gap-2 group">

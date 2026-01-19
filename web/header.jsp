@@ -27,10 +27,11 @@
 		}
 	</script>
 </head>
-<body class="page-wrapper">
+<body class="page-wrapper overflow-x-hidden">
+
 
 	<!-- Navigation Bar -->
-	<nav class="fixed w-full z-50 transition-all duration-300 bg-white shadow-sm border-b border-gray-100">
+	<nav class="fixed w-full top-0 z-50 transition-all duration-300 bg-white shadow-sm border-b border-gray-100">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex justify-between items-center h-20">
 				<!-- Brand -->
@@ -38,7 +39,6 @@
 					<a href="index.jsp" class="text-2xl font-bold tracking-tight text-primary hover:opacity-90 transition-opacity">
 						CampusHub
 					</a>
-					<!-- Desktop Menu -->
 					<div class="hidden md:ml-10 md:flex space-x-8">
 						<a href="index.jsp" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Home</a>
 						<a href="categories.jsp" class="text-gray-600 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Categories</a>
@@ -52,8 +52,15 @@
 							<!-- Logged In User -->
 							<div class="relative group">
 								<button class="flex items-center space-x-3 focus:outline-none py-2 px-3 rounded-xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100">
-									<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-sm">
-										${sessionScope.userName.substring(0,1).toUpperCase()}
+									<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg shadow-sm overflow-hidden">
+										<c:choose>
+											<c:when test="${not empty sessionScope.profileImage}">
+												<img src="${sessionScope.profileImage}" class="w-full h-full object-cover">
+											</c:when>
+											<c:otherwise>
+												${sessionScope.userName.substring(0,1).toUpperCase()}
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<div class="hidden sm:block text-left">
 										<p class="text-xs text-gray-400 font-medium leading-none mb-1">Welcome back,</p>
@@ -66,25 +73,25 @@
 								
 								<!-- Dropdown Menu -->
 								<div class="absolute right-0 w-64 mt-2 origin-top-right bg-white border border-gray-100 rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform scale-95 group-hover:scale-100 z-50">
-									<div class="py-2">
-										<a href="profile" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors">
-											<svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+									<div class="p-2 space-y-1">
+										<a href="profile" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
+											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
 											My Profile
 										</a>
-										<a href="cart" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors">
-											<svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+										<a href="cart" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
+											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
 											My Cart
 										</a>
-										<a href="orders" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors">
-											<svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+										<a href="orders" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
+											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
 											My Orders
 										</a>
-										<a href="sellerListings" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors border-b border-gray-50">
-											<svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+										<a href="sellerListings" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all border-b border-gray-50 mb-1">
+											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
 											My Listings
-                                                                                </a>
-										<a href="logout" class="flex items-center px-4 py-3 text-sm text-primary font-semibold hover:bg-primary/5 transition-colors">
-											<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+										</a>
+										<a href="logout" class="flex items-center px-4 py-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition-all">
+											<svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
 											Logout
 										</a>
 									</div>
@@ -94,7 +101,7 @@
 						<c:otherwise>
 							<!-- Not Logged In -->
 							<div class="flex items-center space-x-4">
-								<a href="login.jsp" class="text-gray-600 hover:text-primary text-sm font-semibold transition-colors px-4 py-2">Login</a>
+								<a href="login.jsp" class="text-gray-600 hover:text-primary text-sm font-semibold transition-colors">Login</a>
 								<a href="register.jsp" class="bg-primary hover:bg-opacity-90 text-white text-sm font-bold px-6 py-3 rounded-xl shadow-md transform active:scale-95 transition-all">
 									Sign Up
 								</a>
@@ -107,4 +114,4 @@
 	</nav>
 
 	<!-- Spacing for fixed navbar -->
-	<div class="h-20"></div>
+	<div class="h-28"></div>

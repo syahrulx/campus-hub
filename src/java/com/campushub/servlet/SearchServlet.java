@@ -43,7 +43,11 @@ public class SearchServlet extends HttpServlet {
 
     private List<Product> searchProducts(String searchTerm) {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM APP.PRODUCT WHERE (LOWER(name) LIKE ? OR LOWER(description) LIKE ?) AND status = 'AVAILABLE' ORDER BY listed_at DESC";
+        // Use uppercase column names for Derby compatibility
+        String sql = "SELECT * FROM APP.PRODUCT WHERE " +
+                "(LOWER(NAME) LIKE LOWER(?) OR LOWER(DESCRIPTION) LIKE LOWER(?)) " +
+                "AND STATUS = 'AVAILABLE' " +
+                "ORDER BY LISTED_AT DESC";
 
         try (Connection conn = DatabaseHelper.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -54,20 +58,21 @@ public class SearchServlet extends HttpServlet {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Product p = new Product();
-                    p.setProductId(rs.getString("product_id"));
-                    p.setSellerId(rs.getString("seller_id"));
-                    p.setCategoryId(rs.getString("category_id"));
-                    p.setName(rs.getString("name"));
-                    p.setDescription(rs.getString("description"));
-                    p.setPrice(rs.getDouble("price"));
-                    p.setCondition(rs.getString("condition"));
-                    p.setStatus(rs.getString("status"));
-                    p.setImageUrl(rs.getString("image_url"));
-                    p.setListedAt(rs.getTimestamp("listed_at"));
+                    p.setProductId(rs.getString("PRODUCT_ID"));
+                    p.setSellerId(rs.getString("SELLER_ID"));
+                    p.setCategoryId(rs.getString("CATEGORY_ID"));
+                    p.setName(rs.getString("NAME"));
+                    p.setDescription(rs.getString("DESCRIPTION"));
+                    p.setPrice(rs.getDouble("PRICE"));
+                    p.setCondition(rs.getString("CONDITION"));
+                    p.setStatus(rs.getString("STATUS"));
+                    p.setImageUrl(rs.getString("IMAGE_URL"));
+                    p.setListedAt(rs.getTimestamp("LISTED_AT"));
                     products.add(p);
                 }
             }
         } catch (SQLException e) {
+            System.err.println("Search query error: " + e.getMessage());
             e.printStackTrace();
         }
         return products;

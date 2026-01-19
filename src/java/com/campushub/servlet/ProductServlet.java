@@ -44,7 +44,7 @@ public class ProductServlet extends HttpServlet {
 
     private List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM APP.PRODUCT";
+        String sql = "SELECT * FROM APP.PRODUCT WHERE STATUS = 'AVAILABLE' ORDER BY LISTED_AT DESC";
 
         try (Connection conn = getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql);

@@ -5,14 +5,14 @@
 -- (Derby doesn't support DROP TABLE IF EXISTS properly in all versions, so we use standard DROP)
 -- Ignore errors if tables don't exist yet.
 
--- DROP TABLE Message;
--- DROP TABLE Cart_Item;
--- DROP TABLE Cart;
--- DROP TABLE Review;
--- DROP TABLE Orders;
--- DROP TABLE Product;
--- DROP TABLE Category;
--- DROP TABLE "User";
+DROP TABLE Message;
+DROP TABLE Cart_Item;
+DROP TABLE Cart;
+DROP TABLE Review;
+DROP TABLE Orders;
+DROP TABLE Product;
+DROP TABLE Category;
+DROP TABLE Users;
 
 -- 1. Users Table ("User" is a reserved word, quoting it or using plural "Users")
 CREATE TABLE Users (
@@ -46,7 +46,7 @@ CREATE TABLE Product (
     price DECIMAL(10, 2) NOT NULL,
     "condition" VARCHAR(50), -- Reserved word
     status VARCHAR(50) DEFAULT 'AVAILABLE',
-    image_url VARCHAR(255),
+    image_url CLOB,
     listed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_product_seller FOREIGN KEY (seller_id) REFERENCES Users(user_id),
     CONSTRAINT fk_product_category FOREIGN KEY (category_id) REFERENCES Category(category_id)

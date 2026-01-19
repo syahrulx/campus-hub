@@ -36,137 +36,139 @@
     </c:when>
     <c:otherwise>
         <!-- Main Content -->
-        <div class="bg-transparent min-h-screen pt-24 pb-20">
+        <div class="bg-transparent min-h-screen pb-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <!-- Seller Brand Header -->
-                <div class="bg-white rounded-[3rem] shadow-sm border border-gray-100 overflow-hidden mb-10">
-                    <div class="h-48 bg-gray-900 relative">
-                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-                        <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
+                <div class="glass-card rounded-[4rem] overflow-hidden mb-12 border-white/40">
+                    <div class="h-64 bg-gray-900 relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-transparent"></div>
+                        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                     </div>
                     
-                    <div class="px-10 pb-10 -mt-20 relative z-10 flex flex-col md:flex-row items-end gap-8">
+                    <div class="px-12 pb-12 -mt-24 relative z-10 flex flex-col md:flex-row items-end gap-10">
                         <!-- Avatar -->
                         <div class="relative group">
-                            <div class="w-40 h-40 rounded-[3rem] bg-white p-2 shadow-2xl shadow-gray-200 group-hover:scale-[1.02] transition-transform duration-500">
+                            <div class="w-48 h-48 rounded-[3.5rem] bg-white/80 p-3 backdrop-blur-xl shadow-2xl transition-all duration-700 group-hover:scale-105 border border-white/50">
                                 <c:choose>
                                     <c:when test="${not empty seller.profileImage}">
-                                        <img src="${seller.profileImage}" alt="${seller.name}" class="w-full h-full rounded-[2.5rem] object-cover">
+                                        <img src="${seller.profileImage}" alt="${seller.name}" class="w-full h-full rounded-[2.8rem] object-cover shadow-inner">
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="w-full h-full rounded-[2.5rem] bg-gray-900 flex items-center justify-center text-white text-5xl font-black italic shadow-inner">
+                                        <div class="w-full h-full rounded-[2.8rem] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-white text-6xl font-black italic shadow-2xl">
                                             ${fn:substring(seller.name, 0, 1)}
                                         </div>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
-                            <div class="absolute bottom-4 right-4 bg-green-500 w-10 h-10 rounded-2xl border-4 border-white flex items-center justify-center text-white shadow-lg">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <div class="absolute bottom-5 right-5 bg-green-500 w-12 h-12 rounded-[1.2rem] border-4 border-white flex items-center justify-center text-white shadow-xl">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                             </div>
                         </div>
 
                         <!-- Basic Info -->
-                        <div class="flex-grow pb-2 text-center md:text-left">
-                            <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-                                <h1 class="text-4xl font-black text-gray-900 italic tracking-tighter uppercase">${seller.name}</h1>
+                        <div class="flex-grow pb-4 text-center md:text-left">
+                            <div class="flex flex-col md:flex-row md:items-center gap-6 mb-6">
+                                <h1 class="text-5xl font-black text-gray-900 italic tracking-tighter uppercase heading-aura">${seller.name}</h1>
                                 <c:if test="${avgRating > 0}">
-                                    <div class="flex items-center justify-center md:justify-start gap-1 bg-yellow-50 px-4 py-2 rounded-2xl border border-yellow-100">
-                                        <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                        <span class="text-sm font-black text-yellow-700 italic">${avgRating} <span class="text-yellow-400 opacity-50 font-medium">/ 5.0</span></span>
+                                    <div class="flex items-center justify-center md:justify-start gap-2 bg-white/60 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/50 shadow-sm">
+                                        <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        <span class="text-sm font-black text-gray-900">${avgRating} <span class="text-gray-400 font-bold ml-1">/ 5.0</span></span>
                                     </div>
                                 </c:if>
                             </div>
                             
-                            <div class="flex flex-wrap justify-center md:justify-start gap-6 text-[10px] font-black uppercase tracking-widest text-gray-400 italic">
+                            <div class="flex flex-wrap justify-center md:justify-start gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 italic">
                                 <c:if test="${not empty seller.university}">
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-2 h-2 rounded-full bg-primary/40"></div>
                                         ${seller.university}
                                     </div>
                                 </c:if>
                                 <c:if test="${not empty seller.createdAt}">
-                                    <div class="flex items-center gap-2">
-                                        <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        Since <fmt:formatDate value="${seller.createdAt}" pattern="MMM yyyy"/>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-2 h-2 rounded-full bg-accent/40"></div>
+                                        Active Since <fmt:formatDate value="${seller.createdAt}" pattern="MMM yyyy"/>
                                     </div>
                                 </c:if>
                             </div>
-
-                            <p class="mt-6 text-sm text-gray-500 font-medium max-w-2xl leading-relaxed">Verified CampusHub seller. Browse their listings and connect for campus meetups.</p>
                         </div>
 
                         <!-- Actions -->
-                        <div class="pb-2">
-                            <a href="messages?with=${sellerId}" class="flex items-center justify-center gap-3 bg-primary text-white px-10 py-5 rounded-3xl font-black text-xs uppercase tracking-widest shadow-xl shadow-red-900/10 hover:shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 group">
-                                <svg class="w-5 h-5 transform group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                                Message Seller
+                        <div class="pb-4">
+                            <a href="messages?with=${sellerId}" class="flex items-center justify-center gap-4 bg-gray-900 text-white px-12 py-6 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-black transition-all hover:-translate-y-1 active-press group">
+                                <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                Message HUB
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Stats Grid -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 text-center hover:border-primary/20 transition-all group">
-                        <p class="text-3xl font-black text-gray-900 italic mb-2 group-hover:text-primary transition-colors">${itemsSold}</p>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Items Sold</p>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                    <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
+                        <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">${itemsSold}</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Items Sold</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 text-center hover:border-primary/20 transition-all group">
-                        <p class="text-3xl font-black text-gray-900 italic mb-2 group-hover:text-primary transition-colors">${activeAds}</p>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Ads</p>
+                    <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
+                        <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">${activeAds}</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Active Ads</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 text-center hover:border-primary/20 transition-all group">
-                        <p class="text-3xl font-black text-gray-900 italic mb-2 group-hover:text-primary transition-colors">${reviewCount}</p>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Reviews</p>
+                    <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
+                        <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">${reviewCount}</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Reviews</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 text-center hover:border-primary/20 transition-all group">
-                        <p class="text-3xl font-black text-gray-900 italic mb-2 group-hover:text-primary transition-colors">
+                    <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
+                        <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">
                             <c:choose>
                                 <c:when test="${avgRating > 0}">${avgRating}</c:when>
                                 <c:otherwise>-</c:otherwise>
                             </c:choose>
                         </p>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Avg Rating</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Avg Rating</p>
                     </div>
                 </div>
 
                 <!-- Listings Section -->
-                <div class="mb-20">
-                    <div class="flex items-center justify-between mb-10">
-                        <h3 class="text-2xl font-black text-gray-900 italic tracking-tight uppercase">Current Listings</h3>
-                        <div class="h-px bg-gray-200 flex-grow mx-8 opacity-50"></div>
+                <div class="mb-24">
+                    <div class="flex items-end justify-between mb-12">
+                        <div>
+                            <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Seller Nexus</p>
+                            <h3 class="text-3xl font-black text-gray-900 italic tracking-tighter uppercase">Current Active Listings</h3>
+                        </div>
+                        <div class="hidden md:block h-px bg-white/50 flex-grow mx-12"></div>
                     </div>
                     
                     <c:choose>
                         <c:when test="${empty products}">
-                            <div class="bg-white rounded-[2.5rem] p-12 shadow-sm border border-gray-100 text-center">
-                                <div class="w-20 h-20 bg-gray-50 rounded-[2rem] flex items-center justify-center text-gray-200 mx-auto mb-6">
-                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                            <div class="glass-card rounded-[4rem] p-20 text-center border-white/30">
+                                <div class="w-24 h-24 bg-white/50 rounded-[2.5rem] flex items-center justify-center text-gray-200 mx-auto mb-8 shadow-inner">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                                 </div>
-                                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">No Active Listings</p>
+                                <p class="text-xs font-black text-gray-400 uppercase tracking-[0.3em]">No Active Listings Found</p>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                                 <c:forEach var="product" items="${products}">
-                                    <div class="group">
-                                        <div class="bg-white rounded-[2.5rem] p-4 shadow-sm border border-gray-100 hover:border-primary/20 transition-all duration-500 hover:shadow-2xl hover:shadow-gray-200 hover:-translate-y-2">
-                                            <div class="aspect-square rounded-3xl overflow-hidden bg-gray-50 relative mb-6">
-                                                <img src="${not empty product.imageUrl ? product.imageUrl : 'images/product-placeholder.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                                                    <a href="productDetail?id=${product.productId}" class="bg-white text-gray-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">Quick View</a>
-                                                </div>
+                                    <div class="group flex flex-col h-full glass-card rounded-[3rem] p-5 hover-lift">
+                                        <div class="relative aspect-square rounded-[2.2rem] overflow-hidden bg-white/50 mb-7">
+                                            <img src="${not empty product.imageUrl ? product.imageUrl : 'images/product-placeholder.png'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                            <div class="absolute inset-x-5 bottom-5 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                                                <a href="productDetail?id=${product.productId}" class="w-full py-4 bg-white text-gray-900 text-center rounded-2xl font-black text-[9px] uppercase tracking-widest shadow-2xl active-press block">QUICK VIEW</a>
                                             </div>
-                                            <div class="px-2 pb-2">
-                                                <p class="text-[10px] font-black text-primary uppercase tracking-widest mb-1 italic">${product.condition}</p>
-                                                <h4 class="text-sm font-black text-gray-900 italic truncate mb-4">${product.name}</h4>
-                                                <div class="flex items-center justify-between">
-                                                    <p class="text-lg font-black text-gray-900 italic">RM <fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></p>
-                                                    <a href="productDetail?id=${product.productId}" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all transform active:scale-95">
-                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                                    </a>
-                                                </div>
+                                        </div>
+                                        <div class="px-2 flex flex-col flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                                                <p class="text-[9px] font-black text-primary uppercase tracking-widest italic">${product.condition}</p>
+                                            </div>
+                                            <h4 class="text-sm font-black text-gray-900 italic truncate mb-6">${product.name}</h4>
+                                            <div class="flex items-center justify-between mt-auto">
+                                                <p class="text-xl font-black text-gray-900 italic">RM <fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></p>
+                                                <a href="productDetail?id=${product.productId}" class="w-11 h-11 rounded-2xl bg-gray-900 text-white flex items-center justify-center hover:bg-primary transition-all active-press">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -178,44 +180,47 @@
 
                 <!-- Reviews Section -->
                 <div>
-                    <div class="flex items-center justify-between mb-10">
-                        <h3 class="text-2xl font-black text-gray-900 italic tracking-tight uppercase">Buyer Feedback</h3>
-                        <div class="h-px bg-gray-200 flex-grow mx-8 opacity-50"></div>
+                    <div class="flex items-end justify-between mb-12">
+                        <div>
+                            <p class="text-[10px] font-black text-accent uppercase tracking-[0.3em] mb-2">Verified Feedback</p>
+                            <h3 class="text-3xl font-black text-gray-900 italic tracking-tighter uppercase">Buyer Testimonials</h3>
+                        </div>
+                        <div class="hidden md:block h-px bg-white/50 flex-grow mx-12"></div>
                     </div>
 
                     <c:choose>
                         <c:when test="${empty reviews}">
-                            <div class="bg-white rounded-[2.5rem] p-12 shadow-sm border border-gray-100 text-center">
-                                <div class="w-20 h-20 bg-gray-50 rounded-[2rem] flex items-center justify-center text-gray-200 mx-auto mb-6">
-                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.382-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                            <div class="glass-card rounded-[4rem] p-20 text-center border-white/30">
+                                <div class="w-24 h-24 bg-white/50 rounded-[2.5rem] flex items-center justify-center text-gray-200 mx-auto mb-8 shadow-inner">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.382-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
                                 </div>
-                                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">No Reviews Yet</p>
+                                <p class="text-xs font-black text-gray-400 uppercase tracking-[0.3em]">Zero Reviews Recorded</p>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <c:forEach var="review" items="${reviews}">
-                                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-gray-100 transition-all">
-                                        <div class="flex justify-between items-start mb-6">
-                                            <div class="flex items-center gap-4">
-                                                <div class="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-400 font-bold italic shadow-inner">
-                                                    ${fn:substring(review.reviewerName, 0, 2)}
+                                    <div class="glass-card p-10 rounded-[3.5rem] hover-lift transition-all border-white/40">
+                                        <div class="flex justify-between items-start mb-8">
+                                            <div class="flex items-center gap-5">
+                                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-gray-500 font-black italic shadow-inner border border-white/50">
+                                                    ${fn:substring(review.reviewerName, 0, 2).toUpperCase()}
                                                 </div>
                                                 <div>
                                                     <h5 class="text-sm font-black text-gray-900 italic uppercase">${review.reviewerName}</h5>
-                                                    <p class="text-[10px] font-black text-gray-300 uppercase tracking-widest mt-0.5">
+                                                    <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-1">
                                                         <fmt:formatDate value="${review.createdAt}" pattern="MMM dd, yyyy"/>
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="flex gap-0.5 text-yellow-400">
+                                            <div class="flex gap-1 text-yellow-500 bg-white/50 px-3 py-1.5 rounded-xl border border-white/50 shadow-sm">
                                                 <c:forEach begin="1" end="5" var="i">
-                                                    <svg class="w-4 h-4 ${i <= review.rating ? 'text-yellow-400' : 'text-gray-200'}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                                    <svg class="w-3.5 h-3.5 ${i <= review.rating ? 'text-yellow-500' : 'text-gray-200'}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                                 </c:forEach>
                                             </div>
                                         </div>
                                         <c:if test="${not empty review.comment}">
-                                            <p class="text-sm text-gray-500 font-medium leading-relaxed italic">"${review.comment}"</p>
+                                            <p class="text-xs text-gray-500 font-semibold leading-relaxed italic border-l-4 border-primary/20 pl-6 py-2">"${review.comment}"</p>
                                         </c:if>
                                     </div>
                                 </c:forEach>
