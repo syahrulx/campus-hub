@@ -1,19 +1,8 @@
 package com.campushub.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,18 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import com.campushub.bean.Product;
+import com.campushub.dao.ProductDao;
+import com.campushub.dao.CategoryDao;
 
 @WebServlet("/addProduct")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1 MB
-        maxFileSize = 1024 * 1024 * 5, // 5 MB
-        maxRequestSize = 1024 * 1024 * 10 // 10 MB
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 10)
 public class AddProductServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String JDBC_URL = "jdbc:derby://localhost:1527/campus_db";
-    private static final String JDBC_USER = "app";
-    private static final String JDBC_PASS = "app";
+    private ProductDao productDao = new ProductDao();
+    private CategoryDao categoryDao = new CategoryDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,8 +33,8 @@ public class AddProductServlet extends HttpServlet {
             return;
         }
 
-        // Load categories for dropdown
-        request.setAttribute("categories", getCategories());
+        // Load categories for dropdown using DAO
+        request.setAttribute("categories", categoryDao.getCategoriesForDropdown());
         request.getRequestDispatcher("/addProduct.jsp").forward(request, response);
     }
 
@@ -67,6 +55,7 @@ public class AddProductServlet extends HttpServlet {
         String categoryId = request.getParameter("categoryId");
         String condition = request.getParameter("condition");
         String quantityStr = request.getParameter("quantity");
+
         int quantity = 1;
         try {
             quantity = Integer.parseInt(quantityStr);
@@ -90,9 +79,8 @@ public class AddProductServlet extends HttpServlet {
                 byte[] imageBytes = buffer.toByteArray();
                 String base64Image = java.util.Base64.getEncoder().encodeToString(imageBytes);
                 String mimeType = filePart.getContentType();
-                if (mimeType == null) {
+                if (mimeType == null)
                     mimeType = "image/jpeg";
-                }
                 imageUrl = "data:" + mimeType + ";base64," + base64Image;
             }
         }
@@ -102,90 +90,30 @@ public class AddProductServlet extends HttpServlet {
             price = Double.parseDouble(priceStr);
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid price format");
-            request.setAttribute("categories", getCategories());
+            request.setAttribute("categories", categoryDao.getCategoriesForDropdown());
             request.getRequestDispatcher("/addProduct.jsp").forward(request, response);
             return;
         }
 
-        boolean success = createProduct(sellerId, categoryId, name, description, price, condition, quantity, imageUrl);
+        // Create product using DAO
+        Product product = new Product();
+        product.setSellerId(sellerId);
+        product.setCategoryId(categoryId);
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setCondition(condition);
+        product.setQuantity(quantity);
+        product.setImageUrl(imageUrl);
+
+        boolean success = productDao.addProduct(product);
 
         if (success) {
             response.sendRedirect("sellerListings.jsp?success=Product added successfully!");
         } else {
             request.setAttribute("error", "Failed to add product. Please try again.");
-            request.setAttribute("categories", getCategories());
+            request.setAttribute("categories", categoryDao.getCategoriesForDropdown());
             request.getRequestDispatcher("/addProduct.jsp").forward(request, response);
         }
-    }
-
-    private Connection getConnection() throws SQLException {
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Derby driver not found", e);
-        }
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-    }
-
-    private List<String[]> getCategories() {
-        List<String[]> categories = new ArrayList<>();
-        String sql = "SELECT category_id, name FROM APP.CATEGORY";
-
-        try (Connection conn = getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                categories.add(new String[] { rs.getString("category_id"), rs.getString("name") });
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return categories;
-    }
-
-    private boolean createProduct(String sellerId, String categoryId, String name,
-            String description, double price, String condition, int quantity, String imageUrl) {
-        String sql = "INSERT INTO APP.PRODUCT (product_id, seller_id, category_id, name, description, price, \"condition\", status, quantity, image_url) "
-                +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, 'AVAILABLE', ?, ?)";
-
-        try (Connection conn = getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            String productId = "p" + UUID.randomUUID().toString().substring(0, 8);
-
-            pstmt.setString(1, productId);
-            pstmt.setString(2, sellerId);
-            pstmt.setString(3, categoryId);
-            pstmt.setString(4, name);
-            pstmt.setString(5, description);
-            pstmt.setDouble(6, price);
-            pstmt.setString(7, condition);
-            pstmt.setInt(8, quantity);
-            pstmt.setString(9, imageUrl);
-
-            int rows = pstmt.executeUpdate();
-            return rows > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private String getFileExtension(Part part) {
-        String contentDisposition = part.getHeader("content-disposition");
-        for (String content : contentDisposition.split(";")) {
-            if (content.trim().startsWith("filename")) {
-                String fileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-                int dotIndex = fileName.lastIndexOf('.');
-                if (dotIndex > 0) {
-                    return fileName.substring(dotIndex);
-                }
-            }
-        }
-        return ".jpg";
     }
 }

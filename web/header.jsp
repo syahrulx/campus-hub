@@ -33,49 +33,63 @@
             boolean isLogin = uri.endsWith("/login.jsp");
             
             int unreadCount = 0;
-                String userId = (String) session.getAttribute("userId");
+            int pendingSellerOrders = 0;
+            int buyerOrderUpdates = 0;
+            String userId = (String) session.getAttribute("userId");
 
-                java.sql.Connection conn = null;
-                java.sql.PreparedStatement ps = null;
-                java.sql.ResultSet rs = null;
+            java.sql.Connection conn = null;
+            java.sql.PreparedStatement ps = null;
+            java.sql.ResultSet rs = null;
 
-                try {
-                    if (userId != null) {
-                        conn = com.campushub.util.DatabaseHelper.getConnection();
-                        ps = conn.prepareStatement(
-                                "SELECT COUNT(*) FROM APP.MESSAGE WHERE RECEIVER_ID = ? AND IS_READ = false"
-                        );
-                        ps.setString(1, userId);
-
-                        rs = ps.executeQuery();
-                        if (rs.next()) {
-                            unreadCount = rs.getInt(1);
-                        }
+            try {
+                if (userId != null) {
+                    conn = com.campushub.util.DatabaseHelper.getConnection();
+                    
+                    // Count unread messages
+                    ps = conn.prepareStatement(
+                            "SELECT COUNT(*) FROM APP.MESSAGE WHERE RECEIVER_ID = ? AND IS_READ = false"
+                    );
+                    ps.setString(1, userId);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        unreadCount = rs.getInt(1);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (rs != null) {
-                            rs.close();
-                        }
-                    } catch (Exception ignore) {
+                    rs.close();
+                    ps.close();
+                    
+                    // Count pending seller orders (orders to fulfill)
+                    ps = conn.prepareStatement(
+                            "SELECT COUNT(*) FROM APP.ORDERS WHERE SELLER_ID = ? AND STATUS = 'PENDING'"
+                    );
+                    ps.setString(1, userId);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        pendingSellerOrders = rs.getInt(1);
                     }
-                    try {
-                        if (ps != null) {
-                            ps.close();
-                        }
-                    } catch (Exception ignore) {
-                    }
-                    try {
-                        if (conn != null) {
-                            conn.close();
-                        }
-                    } catch (Exception ignore) {
+                    rs.close();
+                    ps.close();
+                    
+                    // Count buyer order updates (shipped or completed orders not yet viewed)
+                    ps = conn.prepareStatement(
+                            "SELECT COUNT(*) FROM APP.ORDERS WHERE BUYER_ID = ? AND STATUS IN ('SHIPPED', 'COMPLETED')"
+                    );
+                    ps.setString(1, userId);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        buyerOrderUpdates = rs.getInt(1);
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try { if (rs != null) rs.close(); } catch (Exception ignore) {}
+                try { if (ps != null) ps.close(); } catch (Exception ignore) {}
+                try { if (conn != null) conn.close(); } catch (Exception ignore) {}
+            }
 
-                request.setAttribute("unreadMsgCount", unreadCount);
+            request.setAttribute("unreadMsgCount", unreadCount);
+            request.setAttribute("pendingSellerOrders", pendingSellerOrders);
+            request.setAttribute("buyerOrderUpdates", buyerOrderUpdates);
         %>
 
 	<!-- Navigation Bar -->
@@ -156,7 +170,15 @@
 										</a>
 										<a href="orders" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
 											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-											My Orders
+											<span>My Orders</span>
+											<c:if test="${buyerOrderUpdates gt 0}">
+												<span class="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-green-500 text-white text-[10px] font-black">
+													<c:choose>
+														<c:when test="${buyerOrderUpdates gt 9}">9+</c:when>
+														<c:otherwise>${buyerOrderUpdates}</c:otherwise>
+													</c:choose>
+												</span>
+											</c:if>
 										</a>
                                                                             
                                                                                 <a href="messages" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
@@ -178,9 +200,21 @@
                                                                                 </a>
 
                                                                             
-										<a href="sellerListings" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all border-b border-gray-50 mb-1">
+										<a href="sellerListings" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
 											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
 											My Listings
+										</a>
+										<a href="sellerOrders" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all border-b border-gray-50 mb-1">
+											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+											<span>Manage Orders</span>
+											<c:if test="${pendingSellerOrders gt 0}">
+												<span class="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-primary text-white text-[10px] font-black">
+													<c:choose>
+														<c:when test="${pendingSellerOrders gt 9}">9+</c:when>
+														<c:otherwise>${pendingSellerOrders}</c:otherwise>
+													</c:choose>
+												</span>
+											</c:if>
 										</a>
 										<a href="logout" class="flex items-center px-4 py-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition-all">
 											<svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>

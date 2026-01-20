@@ -1,149 +1,5 @@
 # 🎓 CampusHub - Student Marketplace
 
-A **Java EE Web Application** for a campus-based marketplace where students can buy and sell products within their university community. Built with JSP, Servlets, Tailwind CSS, and Derby Database.
-
----
-
-## ✨ Features
-
-- 🔐 User authentication (Login/Register)
-- 🛍️ Browse products by categories
-- 🔍 Search functionality
-- 🛒 Shopping cart & checkout
-- 💳 Payment processing
-- 👤 User profiles
-- 📦 Seller dashboard (manage listings, orders)
-- 💬 Messaging system
-- 👤 Seller public profiles
-
----
-
-## 🚀 Quick Setup
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/syahrulx/campus-hub.git
-```
-
-### 2. Copy Database
-
-Copy `setup/campus_db` folder to your Derby location:
-
-- **Mac/Linux**: `~/.netbeans-derby/`
-- **Windows**: `C:\Users\<YourName>\.netbeans-derby\`
-
-### 3. Open in NetBeans
-
-File → Open Project → Select `campus-hub` folder
-
-### 4. Start Derby Database
-
-Services tab → Java DB → Right-click → **Start Server**
-
-### 5. Run Project
-
-Right-click project → **Run**
-
-App opens at: `http://localhost:8080/campushub/`
-
----
-
-## 🗄️ Database Details
-
-| Property | Value           |
-| -------- | --------------- |
-| Type     | Java DB (Derby) |
-| Name     | `campus_db`     |
-| User     | `app`           |
-| Password | `app`           |
-
----
-
-## � Project Structure
-
-```
-campus-hub/
-├── setup/
-│   ├── campus_db/              # Derby database files
-│   └── campus_db.sql           # SQL schema
-├── src/java/com/campushub/
-│   ├── bean/                   # Data models (User, Product, Cart)
-│   ├── servlet/                # Controllers (18 servlets)
-│   └── util/                   # DatabaseHelper
-├── web/
-│   ├── css/changes.css         # Global styles
-│   ├── images/                 # Assets
-│   ├── header.jsp              # Shared header
-│   ├── footer.jsp              # Shared footer
-│   └── *.jsp                   # View pages
-└── nbproject/                  # NetBeans config
-```
-
----
-
-## 📄 Pages Overview
-
-### Authentication
-
-| Page                 | Description              |
-| -------------------- | ------------------------ |
-| `login.jsp`          | User login               |
-| `register.jsp`       | New account registration |
-| `forgotPassword.jsp` | Password recovery        |
-
-### Marketplace
-
-| Page                | Description         |
-| ------------------- | ------------------- |
-| `userHome.jsp`      | User dashboard      |
-| `viewProducts.jsp`  | Browse all products |
-| `categories.jsp`    | Browse by category  |
-| `searchResults.jsp` | Search results      |
-| `productDetail.jsp` | Product details     |
-
-### Shopping
-
-| Page                    | Description          |
-| ----------------------- | -------------------- |
-| `cartDetails.jsp`       | Shopping cart        |
-| `payment.jsp`           | Checkout             |
-| `paymentProcessing.jsp` | Processing animation |
-| `orderSuccess.jsp`      | Order confirmation   |
-| `orderDetails.jsp`      | Order tracking       |
-
-### Seller Dashboard
-
-| Page                 | Description       |
-| -------------------- | ----------------- |
-| `sellerListings.jsp` | My listings       |
-| `sellerOrders.jsp`   | Incoming orders   |
-| `addProduct.jsp`     | Add new product   |
-| `editProduct.jsp`    | Edit product      |
-| `shippedItems.jsp`   | Shipped orders    |
-| `unshippedItems.jsp` | Pending shipments |
-
-### Profile & Communication
-
-| Page                | Description           |
-| ------------------- | --------------------- |
-| `userProfile.jsp`   | View profile          |
-| `editProfile.jsp`   | Edit profile          |
-| `sellerProfile.jsp` | Seller public profile |
-| `messages.jsp`      | Chat system           |
-
----
-
-## 🛠️ Technologies
-
-- **Backend**: Java EE (JSP & Servlets)
-- **Database**: Apache Derby (Java DB)
-- **Frontend**: Tailwind CSS, Modern UI
-- **Server**: GlassFish 5
-- **IDE**: NetBeans
-
----
-
 ## 👥 Group Project - CSC584 (Enterprise Web Development)
 
 **Course**: CSC584 - Enterprise Web Development  
@@ -161,9 +17,75 @@ campus-hub/
 
 ---
 
+## 📖 About
+
+CampusHub is a **Java EE web application** for a campus-based marketplace where students can buy and sell products within their university community.
+
+### Key Features
+
+- 🔐 User authentication (Login/Register)
+- 🛍️ Browse & search products
+- 🛒 Shopping cart & checkout
+- 💳 Payment processing
+- 📦 Order tracking
+- 👤 Seller dashboard & listings
+- 💬 Messaging system
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer    | Technology               |
+| -------- | ------------------------ |
+| Backend  | Java EE (JSP & Servlets) |
+| Database | Apache Derby (Java DB)   |
+| Frontend | Tailwind CSS             |
+| Server   | GlassFish 5              |
+| IDE      | NetBeans                 |
+
+---
+
+## 🚀 Quick Setup
+
+1. **Clone**: `git clone https://github.com/syahrulx/campus-hub.git`
+2. **Copy DB**: Copy `setup/campus_db` to `~/.netbeans-derby/`
+3. **Open**: Open project in NetBeans
+4. **Start Derby**: Services → Java DB → Start Server
+5. **Run**: Right-click project → Run
+
+**Local URL**: `http://localhost:8080/campushub/`
+
+---
+
 ## 🌐 Live Demo
 
 **URL**: [http://134.209.111.165:8080/campushub/](http://134.209.111.165:8080/campushub/)
+
+---
+
+## 🗄️ Database
+
+| Property | Value           |
+| -------- | --------------- |
+| Type     | Java DB (Derby) |
+| Name     | `campus_db`     |
+| User     | `app`           |
+| Password | `app`           |
+
+---
+
+## 📁 Project Structure
+
+```
+campushub/
+├── src/java/com/campushub/
+│   ├── bean/      # Data models
+│   ├── dao/       # Data Access Objects
+│   ├── servlet/   # Controllers
+│   └── util/      # Utilities
+├── web/           # JSP pages & assets
+└── setup/         # Database files
+```
 
 ---
 

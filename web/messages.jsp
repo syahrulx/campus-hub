@@ -98,12 +98,26 @@
 										</p>
 									</div>
 								</div>
-								<div class="flex items-center gap-3">
-									<button class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-red-50 transition-all">
+							<div class="flex items-center gap-3 relative">
+								<!-- Delete Chat Dropdown -->
+								<div class="relative" x-data="{ open: false }">
+									<button @click="open = !open" class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-red-50 transition-all">
 										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
 									</button>
+									<div x-show="open" @click.away="open = false" x-cloak class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50">
+										<form action="messages" method="POST" onsubmit="return confirm('Delete this chat? This cannot be undone.');">
+											<input type="hidden" name="action" value="delete">
+											<input type="hidden" name="otherUserId" value="${chatWithId}">
+											<input type="hidden" name="productId" value="${currentProductId}">
+											<button type="submit" class="w-full px-4 py-3 text-left text-sm font-bold text-red-500 hover:bg-red-50 flex items-center gap-3 transition-all">
+												<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+												Delete Chat
+											</button>
+										</form>
+									</div>
 								</div>
 							</div>
+						</div>
 
 							<!-- Messages Area -->
 							<div class="flex-grow overflow-y-auto p-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5 space-y-8" id="chatMessages">

@@ -50,13 +50,13 @@ public class MessageServlet extends HttpServlet {
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", conversationWith);
             request.setAttribute("currentProductId", productId);
-            
+
             // Get product name
             String sql = "SELECT name FROM product WHERE product_id = ?";
             String productName = null;
 
             try (Connection conn = DatabaseHelper.getConnection();
-                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                    PreparedStatement ps = conn.prepareStatement(sql)) {
 
                 ps.setString(1, productId);
 
@@ -73,7 +73,7 @@ public class MessageServlet extends HttpServlet {
 
             // Mark messages as read
             markAsRead(userId, conversationWith, productId);
-            
+
         } else if (!conversations.isEmpty()) {
             // Default to first conversation
             Map<String, Object> firstConvo = conversations.get(0);
@@ -86,13 +86,13 @@ public class MessageServlet extends HttpServlet {
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", firstConvoId);
             request.setAttribute("currentProductId", firstProductId);
-            
+
             // Get product name
             String sql = "SELECT name FROM product WHERE product_id = ?";
             String productName = null;
 
             try (Connection conn = DatabaseHelper.getConnection();
-                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                    PreparedStatement ps = conn.prepareStatement(sql)) {
 
                 ps.setString(1, productId);
 
@@ -123,13 +123,27 @@ public class MessageServlet extends HttpServlet {
             return;
         }
 
-        String senderId = (String) session.getAttribute("userId");
+        String userId = (String) session.getAttribute("userId");
+        String action = request.getParameter("action");
+
+        // Handle delete chat action
+        if ("delete".equals(action)) {
+            String otherUserId = request.getParameter("otherUserId");
+            String productId = request.getParameter("productId");
+            if (otherUserId != null && productId != null) {
+                deleteConversation(userId, otherUserId, productId);
+            }
+            response.sendRedirect("messages");
+            return;
+        }
+
+        // Handle send message action
         String receiverId = request.getParameter("receiverId");
         String content = request.getParameter("content");
         String productId = request.getParameter("productId");
 
         if (receiverId != null && content != null && !content.trim().isEmpty()) {
-            sendMessage(senderId, receiverId, content, productId);
+            sendMessage(userId, receiverId, content, productId);
         }
 
         response.sendRedirect("messages?with=" + receiverId + "&productId=" + productId);
@@ -261,6 +275,23 @@ public class MessageServlet extends HttpServlet {
             pstmt.setString(1, receiverId);
             pstmt.setString(2, senderId);
             pstmt.setString(3, productId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteConversation(String userId, String otherUserId, String productId) {
+        String sql = "DELETE FROM APP.MESSAGE WHERE " +
+                "((sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)) " +
+                "AND product_id = ?";
+        try (Connection conn = DatabaseHelper.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            pstmt.setString(2, otherUserId);
+            pstmt.setString(3, otherUserId);
+            pstmt.setString(4, userId);
+            pstmt.setString(5, productId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
