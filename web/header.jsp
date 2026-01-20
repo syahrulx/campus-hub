@@ -28,7 +28,11 @@
 	</script>
 </head>
 <body class="page-wrapper overflow-x-hidden">
-
+        <%
+            String uri = request.getRequestURI(); // /campus-hub/login.jsp or /campus-hub/register.jsp
+            boolean isLogin = uri.endsWith("/login.jsp");
+            boolean isRegister = uri.endsWith("/register.jsp");
+        %>
 
 	<!-- Navigation Bar -->
 	<nav class="fixed w-full top-0 z-50 transition-all duration-300 bg-white shadow-sm border-b border-gray-100">
@@ -134,10 +138,24 @@
 						<c:otherwise>
 							<!-- Not Logged In -->
 							<div class="flex items-center space-x-4">
-								<a href="login.jsp" class="text-gray-600 hover:text-primary text-sm font-semibold transition-colors">Login</a>
-								<a href="register.jsp" class="bg-primary hover:bg-opacity-90 text-white text-sm font-bold px-6 py-3 rounded-xl shadow-md transform active:scale-95 transition-all">
-									Sign Up
-								</a>
+								<!-- Not Logged In -->
+                                                        <% if (isLogin) { %>
+                                                            <div class="flex items-center space-x-4">
+                                                                <a href="login.jsp" class="bg-primary hover:bg-opacity-90 text-white text-sm font-bold px-6 py-3 rounded-xl shadow-md transform active:scale-95 transition-all">Login</a>
+                                                                <a href="register.jsp" class="text-gray-600 hover:text-primary text-sm font-semibold transition-colors px-4 py-2">
+                                                                        Sign Up
+                                                                </a>
+                                                            </div>
+                                                        <% } %>
+                                                        
+                                                        <% if (isRegister) { %>
+                                                            <div class="flex items-center space-x-4">
+                                                                <a href="login.jsp" class="text-gray-600 hover:text-primary text-sm font-semibold transition-colors px-4 py-2">Login</a>
+                                                                <a href="register.jsp" class="bg-primary hover:bg-opacity-90 text-white text-sm font-bold px-6 py-3 rounded-xl shadow-md transform active:scale-95 transition-all">
+                                                                        Sign Up
+                                                                </a>
+                                                            </div>
+                                                        <% } %>
 							</div>
 						</c:otherwise>
 					</c:choose>

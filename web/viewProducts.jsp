@@ -27,13 +27,27 @@
 			
 			<!-- Section Header -->
 			<div class="mb-16 flex items-end justify-between">
-				<div>
-					<p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Verified Listings</p>
-					<h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase italic">Featured Collections</h2>
-				</div>
-				<div class="hidden md:block h-px bg-white/50 flex-grow mx-12"></div>
-				<p class="text-[11px] font-black text-gray-400 uppercase tracking-widest">Global Marketplace Feed</p>
-			</div>
+                            <div>
+                                <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Verified Listings</p>
+
+                                <!-- Filtered by Category -->
+                                <c:if test="${not empty selectedCategory}">
+                                    <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase italic">
+                                        ${categoryName} Collections
+                                    </h2>
+                                </c:if>
+
+                                <!-- Featured Products -->
+                                <c:if test="${empty selectedCategory}">
+                                    <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase italic">
+                                        Featured Collections
+                                    </h2>
+                                </c:if>
+                            </div>
+
+                            <div class="hidden md:block h-px bg-white/50 flex-grow mx-12"></div>
+                            <p class="text-[11px] font-black text-gray-400 uppercase tracking-widest">Global Marketplace Feed</p>
+                        </div>
 
 			<!-- Product Grid -->
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
