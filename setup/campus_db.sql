@@ -46,6 +46,7 @@ CREATE TABLE Product (
     price DECIMAL(10, 2) NOT NULL,
     "condition" VARCHAR(50), -- Reserved word
     status VARCHAR(50) DEFAULT 'AVAILABLE',
+    quantity INT DEFAULT 1,
     image_url CLOB,
     listed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_product_seller FOREIGN KEY (seller_id) REFERENCES Users(user_id),

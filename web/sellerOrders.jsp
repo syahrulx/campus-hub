@@ -82,7 +82,7 @@
 
 										<!-- Buyer Section -->
 										<div class="lg:col-span-4 space-y-4 pt-6 lg:pt-0 lg:border-l border-gray-50 lg:pl-10">
-											<p class="text-[10px] font-black text-gray-300 uppercase tracking-widest">Acquired By</p>
+											<p class="text-[10px] font-black text-gray-300 uppercase tracking-widest">Buyer</p>
 											<div>
 												<p class="font-black text-gray-900 italic uppercase flex items-center gap-2">
 													${order[7]}

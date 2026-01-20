@@ -66,6 +66,15 @@ public class AddProductServlet extends HttpServlet {
         String priceStr = request.getParameter("price");
         String categoryId = request.getParameter("categoryId");
         String condition = request.getParameter("condition");
+        String quantityStr = request.getParameter("quantity");
+        int quantity = 1;
+        try {
+            quantity = Integer.parseInt(quantityStr);
+            if (quantity < 1)
+                quantity = 1;
+        } catch (NumberFormatException e) {
+            quantity = 1;
+        }
 
         // Handle file upload - convert to Base64 data URI
         String imageUrl = "images/product-placeholder.png";
@@ -98,7 +107,7 @@ public class AddProductServlet extends HttpServlet {
             return;
         }
 
-        boolean success = createProduct(sellerId, categoryId, name, description, price, condition, imageUrl);
+        boolean success = createProduct(sellerId, categoryId, name, description, price, condition, quantity, imageUrl);
 
         if (success) {
             response.sendRedirect("sellerListings.jsp?success=Product added successfully!");
@@ -137,10 +146,10 @@ public class AddProductServlet extends HttpServlet {
     }
 
     private boolean createProduct(String sellerId, String categoryId, String name,
-            String description, double price, String condition, String imageUrl) {
-        String sql = "INSERT INTO APP.PRODUCT (product_id, seller_id, category_id, name, description, price, \"condition\", status, image_url) "
+            String description, double price, String condition, int quantity, String imageUrl) {
+        String sql = "INSERT INTO APP.PRODUCT (product_id, seller_id, category_id, name, description, price, \"condition\", status, quantity, image_url) "
                 +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, 'AVAILABLE', ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, 'AVAILABLE', ?, ?)";
 
         try (Connection conn = getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -154,7 +163,8 @@ public class AddProductServlet extends HttpServlet {
             pstmt.setString(5, description);
             pstmt.setDouble(6, price);
             pstmt.setString(7, condition);
-            pstmt.setString(8, imageUrl);
+            pstmt.setInt(8, quantity);
+            pstmt.setString(9, imageUrl);
 
             int rows = pstmt.executeUpdate();
             return rows > 0;

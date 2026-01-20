@@ -90,10 +90,10 @@
 													Details
 												</a>
 												<c:if test="${order[4] == 'COMPLETED'}">
-													<a href="#" class="px-6 py-2 bg-primary text-white rounded-xl font-black text-[10px] uppercase tracking-widest shadow-md hover:shadow-primary/20 transition-all active:scale-95">
-														Reorder
-													</a>
-												</c:if>
+									<a href="review?orderId=${order[0]}" class="px-6 py-2 bg-primary text-white rounded-xl font-black text-[10px] uppercase tracking-widest shadow-md hover:shadow-primary/20 transition-all active:scale-95">
+										Review
+									</a>
+								</c:if>
 											</div>
 										</div>
 									</div>

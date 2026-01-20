@@ -133,7 +133,7 @@
                 <div class="mb-24">
                     <div class="flex items-end justify-between mb-12">
                         <div>
-                            <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Seller Nexus</p>
+                            <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">About the Seller</p>
                             <h3 class="text-3xl font-black text-gray-900 italic tracking-tighter uppercase">Current Active Listings</h3>
                         </div>
                         <div class="hidden md:block h-px bg-white/50 flex-grow mx-12"></div>

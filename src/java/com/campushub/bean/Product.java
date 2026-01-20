@@ -14,6 +14,7 @@ public class Product implements Serializable {
     private double price;
     private String condition;
     private String status;
+    private int quantity = 1;
     private String imageUrl;
     private Timestamp listedAt;
     private String sellerName; // For display purposes
@@ -84,6 +85,14 @@ public class Product implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getImageUrl() {

@@ -62,7 +62,7 @@
 							<div class="w-24 h-24 rounded-[2rem] bg-gray-50 flex items-center justify-center text-gray-200 mb-8 border border-dashed border-gray-200">
 								<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
 							</div>
-							<h4 class="text-xl font-black text-gray-900 italic tracking-tight uppercase mb-2">No Active Inventory</h4>
+							<h4 class="text-xl font-black text-gray-900 italic tracking-tight uppercase mb-2">No Listings Yet</h4>
 							<p class="text-sm text-gray-400 font-medium max-w-xs mx-auto mb-8">You haven't listed any products yet. Start selling to other students on campus!</p>
 							<a href="addProduct" class="px-10 py-4 bg-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-red-900/10 hover:shadow-primary/20 transition-all active:scale-95">
 								Sell Your First Item

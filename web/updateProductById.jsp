@@ -72,7 +72,7 @@
 			<div class="mt-12 text-center">
 				<a href="sellerListings.jsp" class="inline-flex items-center gap-2 text-[10px] font-black text-gray-400 hover:text-primary transition-colors uppercase tracking-[0.3em] italic">
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-					Return to Nexus
+					Back to My Listings
 				</a>
 			</div>
 		</div>

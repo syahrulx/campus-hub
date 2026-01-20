@@ -73,6 +73,7 @@ public class ProductDetailServlet extends HttpServlet {
                     p.setPrice(rs.getDouble("price"));
                     p.setCondition(rs.getString("condition"));
                     p.setStatus(rs.getString("status"));
+                    p.setQuantity(rs.getInt("quantity"));
                     p.setImageUrl(rs.getString("image_url"));
                     p.setListedAt(rs.getTimestamp("listed_at"));
                     return p;

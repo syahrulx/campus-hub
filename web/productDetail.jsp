@@ -22,7 +22,7 @@
 			<!-- Breadcrumb -->
 			<nav class="flex mb-12" aria-label="Breadcrumb">
 				<ol class="flex items-center space-x-3 text-[10px] font-black uppercase tracking-widest text-gray-400 italic">
-					<li><a href="products" class="hover:text-primary transition-colors">Nexus</a></li>
+					<li><a href="products" class="hover:text-primary transition-colors">Marketplace</a></li>
 					<li><div class="w-1 h-1 rounded-full bg-gray-300"></div></li>
 					<li><a href="products?category=${product.categoryId}" class="hover:text-primary transition-colors">${categoryName}</a></li>
 					<li><div class="w-1 h-1 rounded-full bg-primary/40"></div></li>
@@ -48,7 +48,7 @@
 							<div class="flex items-center gap-4">
 								<c:choose>
 									<c:when test="${product.status == 'AVAILABLE'}">
-										<span class="inline-flex items-center px-5 py-2 rounded-2xl text-[10px] font-black bg-green-500/10 text-green-600 border border-green-500/20 uppercase tracking-widest italic">Inventory Active</span>
+										<span class="inline-flex items-center px-5 py-2 rounded-2xl text-[10px] font-black bg-green-500/10 text-green-600 border border-green-500/20 uppercase tracking-widest italic">Available</span>
 									</c:when>
 									<c:otherwise>
 										<span class="inline-flex items-center px-5 py-2 rounded-2xl text-[10px] font-black bg-red-500/10 text-red-600 border border-red-500/20 uppercase tracking-widest italic">${product.status}</span>
@@ -75,14 +75,18 @@
 						</div>
 
 						<!-- Details Grid -->
-						<div class="grid grid-cols-2 gap-6">
-							<div class="bg-gray-50 p-6 rounded-[2rem] border border-gray-100 text-center">
+						<div class="grid grid-cols-3 gap-4">
+							<div class="bg-gray-50 p-5 rounded-[2rem] border border-gray-100 text-center">
 								<p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">Category</p>
 								<p class="text-sm font-bold text-gray-900 uppercase">${categoryName}</p>
 							</div>
-							<div class="bg-gray-50 p-6 rounded-[2rem] border border-gray-100 text-center">
-								<p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">Posted On</p>
-								<p class="text-sm font-bold text-gray-900 uppercase"><fmt:formatDate value="${product.listedAt}" pattern="MMM dd, yyyy"/></p>
+							<div class="bg-gray-50 p-5 rounded-[2rem] border border-gray-100 text-center">
+								<p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">In Stock</p>
+								<p class="text-sm font-bold ${product.quantity > 0 ? 'text-green-600' : 'text-red-500'} uppercase">${product.quantity} ${product.quantity == 1 ? 'unit' : 'units'}</p>
+							</div>
+							<div class="bg-gray-50 p-5 rounded-[2rem] border border-gray-100 text-center">
+								<p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">Posted</p>
+								<p class="text-sm font-bold text-gray-900 uppercase"><fmt:formatDate value="${product.listedAt}" pattern="MMM dd"/></p>
 							</div>
 						</div>
 
@@ -109,7 +113,7 @@
 											<input type="hidden" name="quantity" value="1">
 											<button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white py-6 rounded-[2.5rem] font-black text-sm uppercase tracking-[0.2em] shadow-2xl shadow-primary/20 transition-all active-press flex items-center justify-center group">
 												<svg class="w-6 h-6 mr-3 transform group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-												Acquire Item
+												Add to Cart
 											</button>
 										</form>
 										<a href="messages?with=${product.sellerId}&productId=${product.productId}" class="flex items-center justify-center w-full glass-card hover:bg-white/40 text-gray-900 py-6 rounded-[2.5rem] font-black text-xs uppercase tracking-[0.2em] transition-all border-white/50 active-press">
@@ -153,8 +157,8 @@
 				<div class="mt-40">
 					<div class="flex items-end justify-between mb-16">
 						<div>
-							<p class="text-[10px] font-black text-accent uppercase tracking-[0.3em] mb-2">Nexus Discoveries</p>
-							<h3 class="text-4xl font-black text-gray-900 italic tracking-tighter uppercase">Anomalies You Might Like</h3>
+							<p class="text-[10px] font-black text-accent uppercase tracking-[0.3em] mb-2">You May Also Like</p>
+							<h3 class="text-4xl font-black text-gray-900 italic tracking-tighter uppercase">Similar Products</h3>
 						</div>
 						<div class="hidden md:block h-px bg-white/50 flex-grow mx-16"></div>
 					</div>

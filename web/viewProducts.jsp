@@ -102,11 +102,11 @@
 					<div class="w-24 h-24 bg-white/50 rounded-[2.5rem] flex items-center justify-center text-gray-300 mx-auto mb-10 shadow-inner">
 						<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
 					</div>
-					<h3 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-4 italic">Zero Listings Detected</h3>
-					<p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-10">Wait for new transmissions from campus traders.</p>
-					<a href="index.jsp" class="px-12 py-5 bg-gray-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-primary transition-all active-press">
-						BACK TO NEXUS
-					</a>
+					<h3 class="text-2xl font-black text-gray-900 uppercase tracking-tight mb-4 italic">No Products Yet</h3>
+				<p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-10">Check back later for new listings from students.</p>
+				<a href="index.jsp" class="px-12 py-5 bg-gray-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-primary transition-all active-press">
+					BACK TO HOME
+				</a>
 				</div>
 			</c:if>
 

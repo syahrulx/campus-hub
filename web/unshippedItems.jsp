@@ -31,7 +31,7 @@
 							<tr class="bg-gray-50 border-b border-gray-100">
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Transaction ID</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Acquisition</th>
-								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Acquirer</th>
+								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Buyer</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Valuation</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Authorized Date</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] text-center">Protocol Actions</th>
@@ -117,7 +117,7 @@
 				<div class="text-center md:text-left">
 					<h4 class="text-sm font-black text-blue-900 uppercase tracking-tight mb-1 italic">Mercantile Advisory</h4>
 					<p class="text-xs font-medium text-blue-700 leading-relaxed uppercase tracking-wide">
-						Ensure direct communication with acquirers to synchronize logistics before finalizing the shipping status.
+							Contact buyers before shipping to arrange delivery.
 					</p>
 				</div>
 			</div>

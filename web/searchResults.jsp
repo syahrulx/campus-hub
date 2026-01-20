@@ -64,7 +64,7 @@
 									<h3 class="text-lg font-black text-gray-900 italic truncate tracking-tight uppercase mb-1">${product.name}</h3>
 									<p class="text-2xl font-black text-primary italic">RM <fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></p>
 									<a href="productDetail?id=${product.productId}" class="mt-6 w-full py-4 border-2 border-primary/20 text-primary rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all active:scale-95">
-										Acquire Item
+										Add to Cart
 										<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
 									</a>
 								</div>

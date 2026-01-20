@@ -50,10 +50,30 @@
 					<c:choose>
 						<c:when test="${not empty sessionScope.user}">
 							<!-- Quick Access Icons -->
-							<a href="messages" class="relative p-3 rounded-xl hover:bg-gray-50 transition-all text-gray-500 hover:text-primary">
-								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-								<span class="sr-only">Messages</span>
-							</a>
+						<%
+							// Get unread message count
+							int unreadCount = 0;
+							String userId = (String) session.getAttribute("userId");
+							if (userId != null) {
+								try {
+									java.sql.Connection conn = com.campushub.util.DatabaseHelper.getConnection();
+									java.sql.PreparedStatement pstmt = conn.prepareStatement(
+										"SELECT COUNT(*) FROM APP.MESSAGE WHERE receiver_id = ? AND is_read = false");
+									pstmt.setString(1, userId);
+									java.sql.ResultSet rs = pstmt.executeQuery();
+									if (rs.next()) { unreadCount = rs.getInt(1); }
+									rs.close(); pstmt.close(); conn.close();
+								} catch (Exception e) { e.printStackTrace(); }
+							}
+							request.setAttribute("unreadMsgCount", unreadCount);
+						%>
+						<a href="messages" class="relative p-3 rounded-xl hover:bg-gray-50 transition-all text-gray-500 hover:text-primary">
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+							<c:if test="${unreadMsgCount > 0}">
+								<span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center">${unreadMsgCount > 9 ? '9+' : unreadMsgCount}</span>
+							</c:if>
+							<span class="sr-only">Messages</span>
+						</a>
 							<a href="cart" class="relative p-3 rounded-xl hover:bg-gray-50 transition-all text-gray-500 hover:text-primary">
 								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
 								<span class="sr-only">Cart</span>

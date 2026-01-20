@@ -58,7 +58,7 @@
 							<tr class="bg-gray-50 border-b border-gray-100">
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Transaction ID</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Acquisition</th>
-								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Acquirer</th>
+								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Buyer</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Valuation</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Finalized</th>
 								<th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Status</th>
