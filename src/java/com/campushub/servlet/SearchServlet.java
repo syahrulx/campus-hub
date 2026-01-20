@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.campushub.bean.Product;
 import com.campushub.dao.ProductDao;
 
@@ -15,26 +16,33 @@ import com.campushub.dao.ProductDao;
 public class SearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private ProductDao productDao = new ProductDao();
+    private final ProductDao productDao = new ProductDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String query = request.getParameter("q");
+        String q = request.getParameter("q");
+        if (q == null) q = "";
+        q = q.trim();
 
-        if (query == null || query.trim().isEmpty()) {
-            request.setAttribute("products", new ArrayList<Product>());
+        // Empty query -> show normal marketplace (no results filter)
+        if (q.isEmpty()) {
+            request.setAttribute("featuredProducts", new ArrayList<Product>());
             request.setAttribute("searchQuery", "");
-            request.getRequestDispatcher("/searchResults.jsp").forward(request, response);
+            request.setAttribute("selectedCategory", null);
+            request.setAttribute("categoryName", null);
+            request.getRequestDispatcher("/viewProducts.jsp").forward(request, response);
             return;
         }
 
-        List<Product> products = productDao.searchProducts(query.trim());
+        List<Product> products = productDao.searchProducts(q);
 
-        request.setAttribute("products", products);
-        request.setAttribute("searchQuery", query);
-        request.setAttribute("resultCount", products.size());
-        request.getRequestDispatcher("/searchResults.jsp").forward(request, response);
+        request.setAttribute("featuredProducts", products);
+        request.setAttribute("searchQuery", q);
+        request.setAttribute("selectedCategory", null);
+        request.setAttribute("categoryName", "Search Results");
+
+        request.getRequestDispatcher("/viewProducts.jsp").forward(request, response);
     }
 }

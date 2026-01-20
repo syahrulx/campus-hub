@@ -36,9 +36,16 @@
                                         ${categoryName} Collections
                                     </h2>
                                 </c:if>
+                                
+                                <!-- Filtered by Search -->
+                                <c:if test="${not empty searchQuery}">
+                                    <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase italic">
+                                        Search results for "${searchQuery}"
+                                    </h2>
+                                </c:if>
 
                                 <!-- Featured Products -->
-                                <c:if test="${empty selectedCategory}">
+                                <c:if test="${empty selectedCategory and empty searchQuery}">
                                     <h2 class="text-4xl font-black text-gray-900 tracking-tighter uppercase italic">
                                         Featured Collections
                                     </h2>
