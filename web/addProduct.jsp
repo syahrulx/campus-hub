@@ -126,7 +126,7 @@
 
 							<!-- Actions -->
 							<div class="pt-8 border-t border-gray-50 flex items-center justify-between gap-6">
-								<a href="products" class="px-8 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">
+								<a href="products" class="px-8 py-4 border-2 border-gray-300 text-gray-500 rounded-[1.5rem] font-black text-[10px] uppercase tracking-widest hover:bg-gray-50 transition-all">
 									CANCEL
 								</a>
 								<button type="submit" class="px-10 py-5 bg-gray-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-primary transition-all shadow-xl shadow-gray-200 hover:shadow-primary/20 transform hover:-translate-y-1 active:translate-y-0">

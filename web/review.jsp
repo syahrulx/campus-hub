@@ -81,9 +81,9 @@
 
 							<!-- Submit -->
 							<div class="flex gap-4">
-								<a href="orders" class="px-8 py-4 border-2 border-gray-100 text-gray-900 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
-									Cancel
-								</a>
+								<a href="orders" class="px-8 py-4 border-2 border-gray-300 text-gray-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
+								Cancel
+							</a>
 								<button type="submit" class="flex-1 py-4 bg-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-red-900/10 hover:shadow-primary/20 transition-all active:scale-95">
 									Submit Review
 								</button>
