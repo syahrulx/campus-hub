@@ -211,6 +211,36 @@
 	</div>
 
 <jsp:include page="footer.jsp" />
+<script>
+  function previewImage(input) {
+    const file = input.files && input.files[0];
+    const preview = document.getElementById("imagePreview");
+    const placeholder = document.getElementById("uploadPlaceholder");
+
+    if (!file) return;
+
+    // Optional: validate type and size (5MB)
+    if (!file.type.startsWith("image/")) {
+      input.value = "";
+      alert("Please choose an image file.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      input.value = "";
+      alert("Max file size is 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+      preview.classList.remove("hidden");     // works for the "empty image" case
+      preview.classList.add("absolute");      // keep layout same
+      if (placeholder) placeholder.classList.add("hidden");
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
 
 </body>
 </html>
