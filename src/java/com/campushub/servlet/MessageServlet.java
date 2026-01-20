@@ -42,75 +42,56 @@ public class MessageServlet extends HttpServlet {
         List<Map<String, Object>> conversations = getConversations(userId);
         request.setAttribute("conversations", conversations);
 
-        // If a specific conversation is selected, load messages
-        if (conversationWith != null && !conversationWith.isEmpty() && productId != null && !productId.isEmpty()) {
-            List<Map<String, Object>> messages = getMessages(userId, conversationWith, productId);
-            Map<String, Object> otherUser = getUserInfo(conversationWith);
-            request.setAttribute("messages", messages);
-            request.setAttribute("chatWith", otherUser);
-            request.setAttribute("chatWithId", conversationWith);
-            request.setAttribute("currentProductId", productId);
+        String activeWith = null;
+        String activeProductId = null;
 
-            // Get product name
-            String sql = "SELECT name FROM product WHERE product_id = ?";
-            String productName = null;
-
-            try (Connection conn = DatabaseHelper.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(sql)) {
-
-                ps.setString(1, productId);
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        productName = rs.getString("name");
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            request.setAttribute("currentProductName", productName);
-
-            // Mark messages as read
-            markAsRead(userId, conversationWith, productId);
-
+        // If a specific conversation is selected
+        if (conversationWith != null && !conversationWith.isEmpty()
+                && productId != null && !productId.isEmpty()) {
+            activeWith = conversationWith;
+            activeProductId = productId;
         } else if (!conversations.isEmpty()) {
             // Default to first conversation
             Map<String, Object> firstConvo = conversations.get(0);
-            String firstConvoId = (String) firstConvo.get("userId");
-            String firstProductId = (String) firstConvo.get("productId");
+            activeWith = (String) firstConvo.get("userId");
+            activeProductId = (String) firstConvo.get("productId");
+        }
 
-            List<Map<String, Object>> messages = getMessages(userId, firstConvoId, firstProductId);
-            Map<String, Object> otherUser = getUserInfo(firstConvoId);
+        // Load messages if we have an active conversation
+        if (activeWith != null && activeProductId != null) {
+            List<Map<String, Object>> messages = getMessages(userId, activeWith, activeProductId);
+            Map<String, Object> otherUser = getUserInfo(activeWith);
+
             request.setAttribute("messages", messages);
             request.setAttribute("chatWith", otherUser);
-            request.setAttribute("chatWithId", firstConvoId);
-            request.setAttribute("currentProductId", firstProductId);
+            request.setAttribute("chatWithId", activeWith);
+            request.setAttribute("currentProductId", activeProductId);
 
-            // Get product name
-            String sql = "SELECT name FROM product WHERE product_id = ?";
-            String productName = null;
-
-            try (Connection conn = DatabaseHelper.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(sql)) {
-
-                ps.setString(1, productId);
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        productName = rs.getString("name");
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            String productName = getProductName(activeProductId);
             request.setAttribute("currentProductName", productName);
 
-            markAsRead(userId, firstConvoId, firstProductId);
+            markAsRead(userId, activeWith, activeProductId);
         }
 
         request.getRequestDispatcher("/messages.jsp").forward(request, response);
+    }
+
+    private String getProductName(String productId) {
+        String sql = "SELECT name FROM product WHERE product_id = ?";
+        try (Connection conn = DatabaseHelper.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, productId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("name");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
