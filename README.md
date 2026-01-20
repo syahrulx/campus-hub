@@ -144,11 +144,27 @@ campus-hub/
 
 ---
 
-## 👨‍💻 Author
+## 👥 Group Project - CSC584 (Enterprise Web Development)
 
-**Syahrul**  
-📧 syahrul@gmail.com
+**Course**: CSC584 - Enterprise Web Development  
+**Semester**: January 2026  
+**Institution**: Universiti Teknologi MARA (UiTM)
+
+### Team Members
+
+| Name                               | Student ID |
+| ---------------------------------- | ---------- |
+| Muhammad Syahrul Bin Ahmad Bazlan  | 2025136721 |
+| Muhammad Syafiq Bin Syahromsyah    | 2025143763 |
+| Amira Najwa Binti Zulkifly         | 2025140181 |
+| Noraina Aishah Binti Zulkifli Zaki | 2025190097 |
 
 ---
 
-_© 2026 CampusHub. All Rights Reserved._
+## 🌐 Live Demo
+
+**URL**: [http://134.209.111.165:8080/campushub/](http://134.209.111.165:8080/campushub/)
+
+---
+
+_© 2026 CampusHub - CSC584 Group Project. All Rights Reserved._
