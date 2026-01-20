@@ -11,20 +11,20 @@
 <jsp:include page="header.jsp" />
 
 	<!-- Main Content -->
-	<div class="bg-transparent min-h-screen pt-24 pb-12 overflow-hidden">
+	<div class="bg-transparent min-h-screen pb-12 overflow-hidden">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
 			
 			<div class="flex items-center justify-between mb-8">
 				<h1 class="text-3xl font-black text-gray-900 tracking-tight italic uppercase">Inbox</h1>
 				<div class="flex items-center gap-2 text-xs font-black text-gray-400 uppercase tracking-widest bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
-					<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-					Online Support
+					<div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+					Beware of malicious link
 				</div>
 			</div>
 
 			<!-- Chat Context Container -->
-			<div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[700px] max-h-[calc(100vh-16rem)]">
-				
+			<div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[700px] max-h-[calc(100vh-13rem)]">
+		
 				<!-- Sidebar: Conversations -->
 				<div class="w-full md:w-80 lg:w-96 border-r border-gray-100 flex flex-col">
 					<div class="p-6 border-b border-gray-50 bg-gray-50/30">
@@ -93,9 +93,8 @@
 									</div>
 									<div>
 										<h3 class="text-base font-black text-gray-900 italic tracking-tight uppercase">${chatWith.name}</h3>
-										<p class="text-[10px] text-green-500 font-black uppercase tracking-widest flex items-center gap-1">
-											<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-											Active Now
+										<p class="text-[10px] text-red-500 font-black uppercase tracking-widest flex items-center gap-1">
+											${currentProductName}
 										</p>
 									</div>
 								</div>

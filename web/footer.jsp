@@ -28,11 +28,11 @@
 					<ul class="space-y-4">
 						<li class="flex items-start gap-3">
 							<svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-							<span class="text-sm text-gray-400 font-medium">Universiti Teknologi Malaysia, Johor Bahru</span>
+							<span class="text-sm text-gray-400 font-medium">Universiti Teknologi MARA, Shah Alam</span>
 						</li>
 						<li class="flex items-center gap-3">
 							<svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-							<span class="text-sm text-gray-400 font-medium lowercase">hello@campushub.com</span>
+							<span class="text-sm text-gray-400 font-medium lowercase">support@campushub.com</span>
 						</li>
 					</ul>
 				</div>
@@ -62,7 +62,7 @@
 			<!-- Copyright Area -->
 			<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
 				<p class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">
-					© 2024 CampusHub. All Rights Reserved.
+					© 2026 CampusHub. All Rights Reserved.
 				</p>
 				<p class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] italic">
 					Innovating Student Commerce

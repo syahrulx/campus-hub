@@ -87,7 +87,7 @@
 						<!-- Location -->
 						<div class="relative group">
 							<label class="absolute -top-2.5 left-4 px-2 bg-white text-[10px] font-black text-gray-400 group-focus-within:text-primary transition-colors uppercase tracking-widest">Exchange Hub</label>
-							<input type="text" value="UTM Skudai, Johor" required
+							<input type="text" value="Universiti Teknologi MARA, Shah Alam" required
 								class="w-full px-6 py-5 bg-white border-2 border-gray-100 rounded-2xl text-sm font-bold text-gray-900 focus:border-primary focus:ring-0 transition-all">
 						</div>
 

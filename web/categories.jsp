@@ -11,7 +11,7 @@
 
 	<!-- Hero Section -->
 	<div class="relative bg-transparent overflow-hidden border-b border-gray-100">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
 			<h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-4">
 				Browse <span class="text-primary text-6xl block sm:inline">Categories</span>
 			</h1>
@@ -24,12 +24,6 @@
 	<!-- Main Content -->
 	<div class="bg-transparent min-h-screen py-16">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			
-			<div class="flex items-center space-x-4 mb-12">
-				<h2 class="text-2xl font-black text-gray-900 uppercase tracking-widest">Select Department</h2>
-				<div class="h-[2px] bg-primary flex-grow"></div>
-			</div>
-
 			<c:choose>
 				<c:when test="${empty categories}">
 					<div class="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-200">

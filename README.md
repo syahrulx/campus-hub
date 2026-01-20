@@ -151,4 +151,4 @@ campus-hub/
 
 ---
 
-_© 2024 CampusHub. All Rights Reserved._
+_© 2026 CampusHub. All Rights Reserved._

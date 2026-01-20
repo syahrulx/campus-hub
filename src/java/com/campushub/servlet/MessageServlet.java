@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.campushub.util.DatabaseHelper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet("/messages")
 public class MessageServlet extends HttpServlet {
@@ -48,9 +50,30 @@ public class MessageServlet extends HttpServlet {
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", conversationWith);
             request.setAttribute("currentProductId", productId);
+            
+            // Get product name
+            String sql = "SELECT name FROM product WHERE product_id = ?";
+            String productName = null;
+
+            try (Connection conn = DatabaseHelper.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, productId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        productName = rs.getString("name");
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            request.setAttribute("currentProductName", productName);
 
             // Mark messages as read
             markAsRead(userId, conversationWith, productId);
+            
         } else if (!conversations.isEmpty()) {
             // Default to first conversation
             Map<String, Object> firstConvo = conversations.get(0);
@@ -63,6 +86,26 @@ public class MessageServlet extends HttpServlet {
             request.setAttribute("chatWith", otherUser);
             request.setAttribute("chatWithId", firstConvoId);
             request.setAttribute("currentProductId", firstProductId);
+            
+            // Get product name
+            String sql = "SELECT name FROM product WHERE product_id = ?";
+            String productName = null;
+
+            try (Connection conn = DatabaseHelper.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, productId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        productName = rs.getString("name");
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MessageServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            request.setAttribute("currentProductName", productName);
 
             markAsRead(userId, firstConvoId, firstProductId);
         }

@@ -37,7 +37,7 @@
 				<form action="forgotPassword" method="POST" class="space-y-6">
 					<div class="relative group">
 						<label class="absolute -top-2.5 left-4 px-2 bg-white text-[10px] font-black text-gray-400 group-focus-within:text-primary transition-colors uppercase tracking-widest">Email Address</label>
-						<input type="email" name="email" required placeholder="syahrul@student.utm.my"
+						<input type="email" name="email" required placeholder="2025123456@student.uitm.edu.my"
 							class="w-full px-6 py-4 bg-white border-2 border-gray-100 rounded-2xl text-sm font-bold text-gray-900 placeholder:text-gray-200 focus:border-primary focus:ring-0 transition-all text-center">
 					</div>
 
