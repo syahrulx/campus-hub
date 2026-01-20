@@ -34,7 +34,7 @@
             
             int unreadCount = 0;
             int pendingSellerOrders = 0;
-            int buyerOrderUpdates = 0;
+            int orderStatusUpdates = 0;
             String userId = (String) session.getAttribute("userId");
 
             java.sql.Connection conn = null;
@@ -57,7 +57,7 @@
                     rs.close();
                     ps.close();
                     
-                    // Count pending seller orders (orders to fulfill)
+                    // Count pending seller orders (new orders to fulfill)
                     ps = conn.prepareStatement(
                             "SELECT COUNT(*) FROM APP.ORDERS WHERE SELLER_ID = ? AND STATUS = 'PENDING'"
                     );
@@ -69,14 +69,14 @@
                     rs.close();
                     ps.close();
                     
-                    // Count buyer order updates (shipped or completed orders not yet viewed)
+                    // Count order status updates for buyer (orders that have been shipped)
                     ps = conn.prepareStatement(
-                            "SELECT COUNT(*) FROM APP.ORDERS WHERE BUYER_ID = ? AND STATUS IN ('SHIPPED', 'COMPLETED')"
+                            "SELECT COUNT(*) FROM APP.ORDERS WHERE BUYER_ID = ? AND STATUS = 'SHIPPED'"
                     );
                     ps.setString(1, userId);
                     rs = ps.executeQuery();
                     if (rs.next()) {
-                        buyerOrderUpdates = rs.getInt(1);
+                        orderStatusUpdates = rs.getInt(1);
                     }
                 }
             } catch (Exception e) {
@@ -89,7 +89,7 @@
 
             request.setAttribute("unreadMsgCount", unreadCount);
             request.setAttribute("pendingSellerOrders", pendingSellerOrders);
-            request.setAttribute("buyerOrderUpdates", buyerOrderUpdates);
+            request.setAttribute("orderStatusUpdates", orderStatusUpdates);
         %>
 
 	<!-- Navigation Bar -->
@@ -171,11 +171,11 @@
 										<a href="orders" class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-all">
 											<svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
 											<span>My Orders</span>
-											<c:if test="${buyerOrderUpdates gt 0}">
-												<span class="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-green-500 text-white text-[10px] font-black">
+											<c:if test="${orderStatusUpdates gt 0}">
+												<span class="ml-auto inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-blue-500 text-white text-[10px] font-black">
 													<c:choose>
-														<c:when test="${buyerOrderUpdates gt 9}">9+</c:when>
-														<c:otherwise>${buyerOrderUpdates}</c:otherwise>
+														<c:when test="${orderStatusUpdates gt 9}">9+</c:when>
+														<c:otherwise>${orderStatusUpdates}</c:otherwise>
 													</c:choose>
 												</span>
 											</c:if>
