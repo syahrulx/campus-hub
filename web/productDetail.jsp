@@ -106,21 +106,64 @@
 											</a>
 										</div>
 									</c:when>
-									<c:when test="${not empty sessionScope.userId}">
-										<form action="cart" method="POST">
-											<input type="hidden" name="action" value="add">
-											<input type="hidden" name="productId" value="${product.productId}">
-											<input type="hidden" name="quantity" value="1">
-											<button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white py-6 rounded-[2.5rem] font-black text-sm uppercase tracking-[0.2em] shadow-2xl shadow-primary/20 transition-all active-press flex items-center justify-center group">
-												<svg class="w-6 h-6 mr-3 transform group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-												Add to Cart
-											</button>
-										</form>
-										<a href="messages?with=${product.sellerId}&productId=${product.productId}" class="flex items-center justify-center w-full glass-card hover:bg-white/40 text-gray-900 py-6 rounded-[2.5rem] font-black text-xs uppercase tracking-[0.2em] transition-all border-white/50 active-press">
-											<svg class="w-6 h-6 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-											Secure Messenger
-										</a>
-									</c:when>
+                                                                    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+                                                                    <c:when test="${not empty sessionScope.userId}">
+                                                                        <c:set var="isDisabled" value="${product.status eq 'SOLD' or product.quantity == 0}" />
+                                                                        <c:set var="remaining" value="${product.quantity - inCartQty}" />
+                                                                        <c:set var="isDisabled" value="${product.status eq 'SOLD' or product.quantity == 0 or remaining <= 0}" />
+
+                                                                        <form action="cart" method="post">
+                                                                            <input type="hidden" name="action" value="add">
+                                                                            <input type="hidden" name="productId" value="${product.productId}">
+
+                                                                            <div>
+                                                                                <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] block mb-3 px-2">
+                                                                                    Quantity
+                                                                                </label>
+
+                                                                                <div class="flex items-stretch gap-4">
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        name="quantity"
+                                                                                        min="1"
+                                                                                        max="${(product.quantity - inCartQty) > 0 ? (product.quantity - inCartQty) : 0}"
+                                                                                        value="1"
+                                                                                        required
+                                                                                        ${isDisabled ? 'disabled' : ''}
+                                                                                        class="w-36 bg-gray-50 border-2 border-gray-50 focus:border-primary px-6 py-5 rounded-[1.5rem] font-bold text-gray-900 placeholder-gray-300 transition-all focus:outline-none focus:ring-4 focus:ring-primary/5 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                                                                                    >
+
+                                                                                    <button
+                                                                                        type="submit"
+                                                                                        ${isDisabled ? 'disabled aria-disabled="true"' : ''}
+                                                                                        class="flex-1 bg-primary hover:bg-primary-dark text-white py-5 rounded-[2.5rem] font-black text-sm uppercase tracking-[0.2em] shadow-2xl shadow-primary/20 transition-all active-press flex items-center justify-center group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
+                                                                                        >
+                                                                                        <svg class="w-6 h-6 mr-3 transform group-hover:rotate-12 transition-transform"
+                                                                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                                                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                                                        </svg>
+                                                                                        Add to Cart
+                                                                                    </button>
+                                                                                </div>
+
+                                                                                <c:if test="${isDisabled}">
+                                                                                    <p class="mt-3 text-xs font-semibold text-gray-400 px-2">This product is out of stock or your cart exceed the product stock.</p>
+                                                                                </c:if>
+                                                                            </div>
+                                                                        </form>
+
+                                                                        <a href="messages?with=${product.sellerId}&productId=${product.productId}"
+                                                                           class="flex items-center justify-center w-full glass-card hover:bg-white/40 text-gray-900 py-6 rounded-[2.5rem] font-black text-xs uppercase tracking-[0.2em] transition-all border-white/50 active-press mt-4">
+                                                                            <svg class="w-6 h-6 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                                                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                                                            </svg>
+                                                                            Secure Messenger
+                                                                        </a>
+                                                                    </c:when>
+
 									<c:otherwise>
 										<a href="login.jsp" class="flex items-center justify-center w-full bg-gray-900 text-white py-6 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl transition-all active-press">
 											AUTH REQUIRED TO PURCHASE

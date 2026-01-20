@@ -62,23 +62,27 @@ public class PaymentServlet extends HttpServlet {
             return;
         }
 
-        String userId = (String) session.getAttribute("userId");
         String paymentMethod = request.getParameter("paymentMethod");
         String bankCode = request.getParameter("bankCode");
 
-        // Validate payment method
-        if (paymentMethod == null || paymentMethod.isEmpty()) {
+        if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
             request.setAttribute("error", "Please select a payment method");
             doGet(request, response);
             return;
         }
 
-        // Store payment info in session for processing page
+        // FPX must select a bank
+        if ("FPX".equals(paymentMethod) && (bankCode == null || bankCode.trim().isEmpty())) {
+            request.setAttribute("error", "Please select a bank for FPX");
+            doGet(request, response);
+            return;
+        }
+
+        // Store in session (source of truth)
         session.setAttribute("paymentMethod", paymentMethod);
         session.setAttribute("bankCode", bankCode);
         session.setAttribute("paymentId", "PAY" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
 
-        // Redirect to processing page (simulates payment gateway)
         response.sendRedirect("paymentProcessing.jsp");
     }
 

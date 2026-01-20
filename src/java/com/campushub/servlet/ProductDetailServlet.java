@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.campushub.bean.Product;
 import com.campushub.bean.User;
 import com.campushub.util.DatabaseHelper;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/productDetail")
 public class ProductDetailServlet extends HttpServlet {
@@ -45,13 +46,46 @@ public class ProductDetailServlet extends HttpServlet {
 
         // Get category name
         String categoryName = getCategoryName(product.getCategoryId());
+        
+        // In-cart quantity (only if logged in)
+        int inCartQty = 0;
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("userId") != null) {
+            String userId = (String) session.getAttribute("userId");
+            inCartQty = getInCartQty(userId, productId);
+        }
 
         request.setAttribute("product", product);
         request.setAttribute("seller", seller);
         request.setAttribute("relatedProducts", relatedProducts);
         request.setAttribute("categoryName", categoryName);
+        request.setAttribute("inCartQty", inCartQty);
 
         request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
+    }
+    
+    private int getInCartQty(String userId, String productId) {
+        String sql
+                = "SELECT COALESCE(SUM(ci.quantity), 0) AS qty "
+                + "FROM APP.CART c "
+                + "JOIN APP.CART_ITEM ci ON c.cart_id = ci.cart_id "
+                + "WHERE c.user_id = ? AND ci.product_id = ?";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, userId);
+            ps.setString(2, productId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("qty");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     private Product getProductById(String productId) {

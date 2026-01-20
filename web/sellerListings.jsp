@@ -78,6 +78,7 @@
 										<th class="px-8 py-6 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Price</th>
 										<th class="px-8 py-6 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Listed On</th>
 										<th class="px-8 py-6 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
+                                                                                <th class="px-8 py-6 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Quantity</th>
 										<th class="px-8 py-6 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Actions</th>
 									</tr>
 								</thead>
@@ -105,9 +106,10 @@
 												<c:choose>
 													<c:when test="${product.status == 'AVAILABLE'}">
 														<span class="inline-flex items-center px-3 py-1 rounded-full bg-green-50 text-green-600 text-[9px] font-black uppercase tracking-widest italic border border-green-100">
-															<span class="w-1 h-1 bg-green-600 rounded-full mr-2"></span>
-															Active
+                                                                                                                    <span class="w-1 h-1 bg-green-600 rounded-full mr-2"></span>
+                                                                                                                    Available
 														</span>
+                                                                                                                
 													</c:when>
 													<c:when test="${product.status == 'SOLD'}">
 														<span class="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 text-[9px] font-black uppercase tracking-widest italic border border-red-100">
@@ -122,6 +124,9 @@
 													</c:otherwise>
 												</c:choose>
 											</td>
+                                                                                        <td class="px-8 py-6">
+                                                                                            <p class="text-sm font-black text-gray-900 italic">${product.quantity}</p>
+                                                                                        </td>
 											<td class="px-8 py-6 text-right">
 												<c:if test="${product.status == 'AVAILABLE'}">
 													<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

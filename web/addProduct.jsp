@@ -98,24 +98,26 @@
 								</div>
 							</div>
 
-						<!-- Price -->
-						<div class="grid grid-cols-2 gap-6">
-							<div>
-								<label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] block mb-3 px-2">Price (RM)</label>
-								<div class="relative">
-									<div class="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
-										<span class="text-sm font-black text-gray-900 italic">RM</span>
-									</div>
-									<input type="number" name="price" placeholder="0.00" step="0.01" min="0" required
-										class="w-full bg-gray-50 border-2 border-gray-50 focus:border-primary pl-20 pr-8 py-5 rounded-[1.5rem] font-bold text-gray-900 placeholder-gray-300 transition-all focus:outline-none focus:ring-4 focus:ring-primary/5 text-sm">
-								</div>
-							</div>
-							<div>
-								<label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] block mb-3 px-2">Quantity</label>
-								<input type="number" name="quantity" placeholder="1" min="1" value="1" required
-									class="w-full bg-gray-50 border-2 border-gray-50 focus:border-primary px-8 py-5 rounded-[1.5rem] font-bold text-gray-900 placeholder-gray-300 transition-all focus:outline-none focus:ring-4 focus:ring-primary/5 text-sm">
-							</div>
-						</div>
+						
+                                                        <div class="grid grid-cols-2 gap-6">
+                                                                <!-- Price -->
+                                                                <div>
+                                                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] block mb-3 px-2">Price (RM)</label>
+                                                                        <div class="relative">
+                                                                                <div class="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
+                                                                                        <span class="text-sm font-black text-gray-900 italic">RM</span>
+                                                                                </div>
+                                                                                <input type="number" name="price" placeholder="0.00" step="0.01" min="0" required
+                                                                                        class="w-full bg-gray-50 border-2 border-gray-50 focus:border-primary pl-20 pr-8 py-5 rounded-[1.5rem] font-bold text-gray-900 placeholder-gray-300 transition-all focus:outline-none focus:ring-4 focus:ring-primary/5 text-sm">
+                                                                        </div>
+                                                                </div>
+                                                                <!-- Quantity -->
+                                                                <div>
+                                                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] block mb-3 px-2">Quantity</label>
+                                                                        <input type="number" name="quantity" placeholder="1" min="1" value="1" required
+                                                                                class="w-full bg-gray-50 border-2 border-gray-50 focus:border-primary px-8 py-5 rounded-[1.5rem] font-bold text-gray-900 placeholder-gray-300 transition-all focus:outline-none focus:ring-4 focus:ring-primary/5 text-sm">
+                                                                </div>
+                                                        </div>
 
 							<!-- Description -->
 							<div>

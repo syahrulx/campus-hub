@@ -72,6 +72,7 @@ public class SellerListingsServlet extends HttpServlet {
                     p.setCondition(rs.getString("condition"));
                     p.setStatus(rs.getString("status"));
                     p.setImageUrl(rs.getString("image_url"));
+                    p.setQuantity(rs.getInt("quantity"));
                     p.setListedAt(rs.getTimestamp("listed_at"));
                     products.add(p);
                 }

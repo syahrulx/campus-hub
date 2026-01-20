@@ -63,23 +63,47 @@ public class CartServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "add":
+            case "add": {
                 String productId = request.getParameter("productId");
-                int quantity = Integer
-                        .parseInt(request.getParameter("quantity") != null ? request.getParameter("quantity") : "1");
-                // Check if user is not the seller
-                if (!isOwnProduct(userId, productId)) {
-                    addToCart(userId, productId, quantity);
-                }
-                response.sendRedirect("cart");
-                break;
+                int qtyReq = Integer.parseInt(request.getParameter("quantity") != null ? request.getParameter("quantity") : "1");
 
-            case "update":
-                String cartItemId = request.getParameter("cartItemId");
-                int newQuantity = Integer.parseInt(request.getParameter("quantity"));
-                updateCartItem(cartItemId, newQuantity);
+                if (isOwnProduct(userId, productId)) {
+                    response.sendRedirect("cart");
+                    break;
+                }
+
+                Product p = getProductForCart(productId);
+                if (p == null || "SOLD".equalsIgnoreCase(p.getStatus()) || p.getQuantity() <= 0) {
+                    response.sendRedirect("cart?error=Out+of+stock");
+                    break;
+                }
+
+                int qty = Math.min(Math.max(qtyReq, 1), p.getQuantity());
+                addToCart(userId, productId, qty);
+
                 response.sendRedirect("cart");
                 break;
+            }
+
+            case "update": {
+                String cartItemId = request.getParameter("cartItemId");
+                int newQtyReq = Integer.parseInt(request.getParameter("quantity"));
+
+                String productId = getProductIdByCartItemId(cartItemId);
+                Product p = (productId != null) ? getProductForCart(productId) : null;
+
+                if (p == null || "SOLD".equalsIgnoreCase(p.getStatus()) || p.getQuantity() <= 0) {
+                    removeCartItem(cartItemId);
+                    response.sendRedirect("cart?error=Item+out+of+stock");
+                    break;
+                }
+
+                int newQty = Math.min(Math.max(newQtyReq, 1), p.getQuantity());
+                updateCartItem(cartItemId, newQty);
+
+                response.sendRedirect("cart");
+                break;
+            }
 
             case "remove":
                 String itemId = request.getParameter("cartItemId");
@@ -218,31 +242,55 @@ public class CartServlet extends HttpServlet {
         List<CartItem> items = new ArrayList<>();
         String cartId = getOrCreateCart(userId);
 
-        String sql = "SELECT ci.*, p.name, p.description, p.price, p.image_url " +
-                "FROM APP.CART_ITEM ci " +
-                "JOIN APP.PRODUCT p ON ci.product_id = p.product_id " +
-                "WHERE ci.cart_id = ?";
+        String sql
+                = "SELECT ci.cart_item_id, ci.cart_id, ci.product_id, ci.quantity AS cart_qty, ci.added_at, "
+                + "       p.name, p.description, p.price, p.image_url, p.quantity AS stock_qty, p.status "
+                + "FROM APP.CART_ITEM ci "
+                + "JOIN APP.PRODUCT p ON ci.product_id = p.product_id "
+                + "WHERE ci.cart_id = ?";
 
         try (Connection conn = getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, cartId);
-            try (ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, cartId);
+
+            try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
+                    String cartItemId = rs.getString("cart_item_id");
+                    String productId = rs.getString("product_id");
+                    int cartQty = rs.getInt("cart_qty");
+                    int stockQty = rs.getInt("stock_qty");
+                    String status = rs.getString("status");
+
+                    // If product cannot be bought, remove from cart
+                    if (stockQty <= 0 || "SOLD".equalsIgnoreCase(status)) {
+                        removeCartItem(conn, cartItemId); // overload that uses same connection
+                        continue;
+                    }
+
+                    // Clamp quantity to available stock
+                    if (cartQty > stockQty) {
+                        cartQty = stockQty;
+                        updateCartItem(conn, cartItemId, cartQty); // overload that uses same connection
+                    }
+
                     CartItem item = new CartItem();
-                    item.setCartItemId(rs.getString("cart_item_id"));
+                    item.setCartItemId(cartItemId);
                     item.setCartId(rs.getString("cart_id"));
-                    item.setProductId(rs.getString("product_id"));
-                    item.setQuantity(rs.getInt("quantity"));
+                    item.setProductId(productId);
+                    item.setQuantity(cartQty);
                     item.setAddedAt(rs.getTimestamp("added_at"));
 
                     Product product = new Product();
-                    product.setProductId(rs.getString("product_id"));
+                    product.setProductId(productId);
                     product.setName(rs.getString("name"));
                     product.setDescription(rs.getString("description"));
                     product.setPrice(rs.getDouble("price"));
                     product.setImageUrl(rs.getString("image_url"));
-                    item.setProduct(product);
+                    product.setQuantity(stockQty);
+                    product.setStatus(status);
 
+                    item.setProduct(product);
                     items.add(item);
                 }
             }
@@ -251,5 +299,60 @@ public class CartServlet extends HttpServlet {
         }
 
         return items;
+    }
+    
+    private void updateCartItem(Connection conn, String cartItemId, int quantity) throws SQLException {
+        if (quantity <= 0) {
+            removeCartItem(conn, cartItemId);
+            return;
+        }
+        String sql = "UPDATE APP.CART_ITEM SET quantity = ? WHERE cart_item_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, quantity);
+            ps.setString(2, cartItemId);
+            ps.executeUpdate();
+        }
+    }
+
+    private void removeCartItem(Connection conn, String cartItemId) throws SQLException {
+        String sql = "DELETE FROM APP.CART_ITEM WHERE cart_item_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cartItemId);
+            ps.executeUpdate();
+        }
+    }
+
+    private Product getProductForCart(String productId) {
+        String sql = "SELECT quantity, status FROM APP.PRODUCT WHERE product_id = ?";
+        try (Connection conn = getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, productId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Product p = new Product();
+                    p.setProductId(productId);
+                    p.setQuantity(rs.getInt("quantity"));
+                    p.setStatus(rs.getString("status"));
+                    return p;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getProductIdByCartItemId(String cartItemId) {
+        String sql = "SELECT product_id FROM APP.CART_ITEM WHERE cart_item_id = ?";
+        try (Connection conn = getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, cartItemId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getString("product_id") : null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

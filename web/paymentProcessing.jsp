@@ -26,10 +26,21 @@
     </style>
 </head>
 <%
-    String paymentMethod = request.getParameter("paymentMethod");
-    String paymentId = request.getParameter("paymentId");
-    if (paymentMethod == null) paymentMethod = "Card";
-    if (paymentId == null) paymentId = "TXN-" + System.currentTimeMillis();
+    // Must be logged in
+    HttpSession sess = request.getSession(false);
+    if (sess == null || sess.getAttribute("userId") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    // Must come from PaymentServlet
+    String paymentMethod = (String) sess.getAttribute("paymentMethod");
+    String paymentId = (String) sess.getAttribute("paymentId");
+
+    if (paymentMethod == null || paymentId == null) {
+        response.sendRedirect("payment");
+        return;
+    }
 %>
 <body class="bg-[#1a1a2e] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900 via-dark to-black min-h-screen flex items-center justify-center p-4">
     
@@ -45,7 +56,7 @@
                 <!-- Portal Branding -->
                 <div class="mb-10">
                     <% if ("FPX".equals(paymentMethod)) { %>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/FPX_logo.svg" alt="FPX" class="h-10 mx-auto">
+                        <img src="https://brandlogovector.com/wp-content/uploads/2021/10/FPX-Logo.png" alt="FPX" class="h-10 mx-auto">
                     <% } else { %>
                         <div class="flex items-center justify-center space-x-4">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-6">
@@ -150,6 +161,9 @@
     </script>
     
     <!-- Hidden form for POST redirect -->
-    <form id="checkoutForm" action="checkout" method="POST" style="display:none;"></form>
+    <<form id="checkoutForm" action="checkout" method="POST" style="display:none;">
+        <input type="hidden" name="paymentId" value="<%= paymentId%>">
+        <input type="hidden" name="paymentMethod" value="<%= paymentMethod%>">
+    </form>
 </body>
 </html>

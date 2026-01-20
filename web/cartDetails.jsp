@@ -44,15 +44,26 @@
 										<h4 class="text-lg font-bold text-gray-900 leading-tight">${item.product.name}</h4>
 										<p class="text-sm text-gray-400 mt-1">Unit Price: RM <fmt:formatNumber value="${item.product.price}" pattern="#,##0.00"/></p>
 										
+                                                                                <c:set var="disabledItem" value="${item.product.status eq 'SOLD' or item.product.quantity == 0}" />
 										<div class="mt-4 flex items-center justify-center sm:justify-start gap-4">
 											<form action="cart" method="POST" class="flex items-center bg-gray-50 rounded-xl p-1 border border-gray-100">
 												<input type="hidden" name="action" value="update">
 												<input type="hidden" name="cartItemId" value="${item.cartItemId}">
-												<input type="number" name="quantity" value="${item.quantity}" min="1" 
-													class="w-12 bg-transparent text-center font-bold text-gray-900 focus:outline-none">
-												<button type="submit" class="text-[10px] font-black uppercase tracking-widest bg-white px-3 py-2 rounded-lg shadow-sm hover:text-primary transition-colors">
-													Sync
-												</button>
+                                                                                                <input type="number"
+                                                                                                       name="quantity"
+                                                                                                       value="${item.quantity > item.product.quantity ? item.product.quantity : item.quantity}"
+                                                                                                       min="1"
+                                                                                                       max="${item.product.quantity}"
+                                                                                                       required
+                                                                                                       ${disabledItem ? 'disabled' : ''}
+                                                                                                       class="w-12 bg-transparent text-center font-bold text-gray-900 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed">
+
+                                                                                                <button type="submit"
+                                                                                                        ${disabledItem ? 'disabled aria-disabled="true"' : ''}
+                                                                                                        class="text-[10px] font-black uppercase tracking-widest bg-white px-3 py-2 rounded-lg shadow-sm hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-400">
+                                                                                                    Sync
+                                                                                                </button>
+
 											</form>
 											
 											<form action="cart" method="POST" class="inline">

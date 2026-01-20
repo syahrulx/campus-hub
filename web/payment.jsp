@@ -56,7 +56,7 @@
 											<h4 class="text-lg font-black text-gray-900 italic">Online Banking (FPX)</h4>
 											<p class="text-sm text-gray-400 font-medium">Instant transfer from your bank</p>
 										</div>
-										<img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/FPX_logo.svg" alt="FPX" class="h-8 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 peer-checked:grayscale-0 peer-checked:opacity-100 transition-all">
+										<img src="https://brandlogovector.com/wp-content/uploads/2021/10/FPX-Logo.png" alt="FPX" class="h-8 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 peer-checked:grayscale-0 peer-checked:opacity-100 transition-all">
 									</label>
 
 									<!-- Banks Grid (Toggled in JS) -->
