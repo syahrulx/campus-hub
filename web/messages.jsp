@@ -93,9 +93,11 @@
 									</div>
 									<div>
 										<h3 class="text-base font-black text-gray-900 italic tracking-tight uppercase">${chatWith.name}</h3>
-										<p class="text-[10px] text-red-500 font-black uppercase tracking-widest flex items-center gap-1">
-											${currentProductName}
-										</p>
+                                                                                <a href="productDetail.jsp?id=${currentProductId}">
+                                                                                    <p class="text-[10px] text-red-500 font-black uppercase tracking-widest flex items-center gap-1">
+                                                                                        <c:out value="${currentProductName}" />
+                                                                                    </p>
+                                                                                </a>
 									</div>
 								</div>
 							<div class="flex items-center gap-3 relative">
