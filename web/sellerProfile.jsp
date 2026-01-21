@@ -40,66 +40,88 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <!-- Seller Brand Header -->
-                <div class="glass-card rounded-[4rem] overflow-hidden mb-12 border-white/40">
-                    <div class="h-64 bg-gray-900 relative">
-                        <div class="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-transparent"></div>
-                        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                    </div>
-                    
-                    <div class="px-12 pb-12 -mt-24 relative z-10 flex flex-col md:flex-row items-end gap-10">
-                        <!-- Avatar -->
-                        <div class="relative group">
-                            <div class="w-48 h-48 rounded-[3.5rem] bg-white/80 p-3 backdrop-blur-xl shadow-2xl transition-all duration-700 group-hover:scale-105 border border-white/50">
-                                <c:choose>
-                                    <c:when test="${not empty seller.profileImage}">
-                                        <img src="${seller.profileImage}" alt="${seller.name}" class="w-full h-full rounded-[2.8rem] object-cover shadow-inner">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="w-full h-full rounded-[2.8rem] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-white text-6xl font-black italic shadow-2xl">
-                                            ${fn:substring(seller.name, 0, 1)}
+                <div class="glass-card rounded-[3rem] mb-8 border-white/40">
+                    <div class="px-5 sm:px-7 lg:px-8 py-7 sm:py-8">
+                        <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-7">
+
+                            <!-- Avatar -->
+                            <div class="relative self-center md:self-auto flex-shrink-0">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32
+                                     rounded-[2rem] bg-white p-2 shadow-xl border border-gray-100">
+                                    <c:choose>
+                                        <c:when test="${not empty seller.profileImage}">
+                                            <img src="${seller.profileImage}" alt="${seller.name}"
+                                                 class="w-full h-full rounded-[1.6rem] object-cover">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="w-full h-full rounded-[1.6rem] bg-gray-900 flex items-center justify-center
+                                                 text-white text-3xl sm:text-4xl font-black italic">
+                                                ${fn:substring(seller.name, 0, 1)}
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="absolute bottom-1.5 right-1.5 bg-green-500
+                                     w-8 h-8 rounded-[0.9rem] border-4 border-white
+                                     flex items-center justify-center text-white shadow-lg">
+                                    <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Basic Info -->
+                            <div class="flex-1 text-center md:text-left">
+                                <div class="flex flex-col md:flex-row md:items-center justify-center md:justify-start gap-3 md:gap-4 mb-3 md:mb-4">
+                                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 italic tracking-tighter uppercase heading-aura break-words">
+                                        ${seller.name}
+                                    </h1>
+
+                                    <c:if test="${avgRating > 0}">
+                                        <div class="inline-flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100 shadow-sm">
+                                            <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            <span class="text-xs font-black text-gray-900">
+                                                ${avgRating} <span class="text-gray-400 font-bold ml-1">/ 5.0</span>
+                                            </span>
                                         </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                            <div class="absolute bottom-5 right-5 bg-green-500 w-12 h-12 rounded-[1.2rem] border-4 border-white flex items-center justify-center text-white shadow-xl">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                            </div>
-                        </div>
+                                    </c:if>
+                                </div>
 
-                        <!-- Basic Info -->
-                        <div class="flex-grow pb-4 text-center md:text-left">
-                            <div class="flex flex-col md:flex-row md:items-center gap-6 mb-6">
-                                <h1 class="text-5xl font-black text-gray-900 italic tracking-tighter uppercase heading-aura">${seller.name}</h1>
-                                <c:if test="${avgRating > 0}">
-                                    <div class="flex items-center justify-center md:justify-start gap-2 bg-white/60 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/50 shadow-sm">
-                                        <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                        <span class="text-sm font-black text-gray-900">${avgRating} <span class="text-gray-400 font-bold ml-1">/ 5.0</span></span>
-                                    </div>
-                                </c:if>
+                                <div class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-5
+                                     text-[9px] sm:text-[10px] font-black uppercase tracking-[0.18em] text-gray-400 italic">
+                                    <c:if test="${not empty seller.university}">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
+                                            <span class="break-words">${seller.university}</span>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${not empty seller.createdAt}">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-accent/40"></div>
+                                            Active Since <fmt:formatDate value="${seller.createdAt}" pattern="MMM yyyy"/>
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                            
-                            <div class="flex flex-wrap justify-center md:justify-start gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 italic">
-                                <c:if test="${not empty seller.university}">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-2 h-2 rounded-full bg-primary/40"></div>
-                                        ${seller.university}
-                                    </div>
-                                </c:if>
-                                <c:if test="${not empty seller.createdAt}">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-2 h-2 rounded-full bg-accent/40"></div>
-                                        Active Since <fmt:formatDate value="${seller.createdAt}" pattern="MMM yyyy"/>
-                                    </div>
-                                </c:if>
-                            </div>
-                        </div>
 
-                        <!-- Actions -->
-                        <div class="pb-4">
-                            <a href="messages?with=${sellerId}" class="flex items-center justify-center gap-4 bg-gray-900 text-white px-12 py-6 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-black transition-all hover:-translate-y-1 active-press group">
-                                <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                                Message HUB
-                            </a>
+                            <!-- Actions -->
+                            <div class="w-full md:w-auto">
+                                <a href="messages?with=${sellerId}"
+                                   class="w-full md:w-auto flex items-center justify-center gap-3
+                                   bg-gray-900 text-white px-6 sm:px-7 py-3 sm:py-3.5
+                                   rounded-[1.5rem] font-black text-[10px] uppercase tracking-widest
+                                   shadow-xl hover:bg-black transition-all active-press group">
+                                    <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                          d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                    </svg>
+                                    Message HUB
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -112,7 +134,7 @@
                     </div>
                     <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
                         <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">${activeAds}</p>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Active Ads</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Items Available</p>
                     </div>
                     <div class="glass-card p-10 rounded-[3rem] text-center hover-lift group border-white/30">
                         <p class="text-4xl font-black text-gray-900 italic mb-3 group-hover:text-primary transition-colors">${reviewCount}</p>
