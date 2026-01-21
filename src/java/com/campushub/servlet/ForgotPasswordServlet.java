@@ -33,7 +33,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 String tempPassword = "temp" + UUID.randomUUID().toString().substring(0, 5);
 
                 // Update password in database
-                if (userDao.updatePassword(email, tempPassword)) {
+                if (userDao.updatePasswordByEmail(email, tempPassword)) {
                     request.setAttribute("successMessage",
                             "Password reset successful! Temporary password: " + tempPassword);
                 } else {

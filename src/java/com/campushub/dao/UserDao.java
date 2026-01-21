@@ -153,7 +153,7 @@ public class UserDao {
      * @param newPassword New password
      * @return true if successful
      */
-    public boolean updatePassword(String email, String newPassword) {
+    public boolean updatePasswordByEmail(String email, String newPassword) {
         String sql = "UPDATE APP.USERS SET password = ? WHERE email = ?";
 
         try (Connection conn = DatabaseHelper.getConnection();
@@ -197,5 +197,46 @@ public class UserDao {
         user.setCreatedAt(rs.getTimestamp("created_at"));
         user.setRating(rs.getDouble("rating"));
         return user;
+    }
+    
+    // Add these methods into your UserDao
+    public boolean checkPassword(String userId, String plainPassword) {
+        String sql = "SELECT password FROM APP.USERS WHERE user_id = ?";
+        try (Connection conn = DatabaseHelper.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String dbPassword = rs.getString("password");
+                    // If you store hashed passwords, verify hash here instead of equals
+                    return dbPassword != null && dbPassword.equals(plainPassword);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param userId
+     * @param newPlainPassword
+     * @return
+     */
+    public boolean updatePassword(String userId, String newPlainPassword) {
+        String sql = "UPDATE APP.USERS SET password = ? WHERE user_id = ?";
+        try (Connection conn = DatabaseHelper.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, newPlainPassword); // If hashing, store hash instead
+            ps.setString(2, userId);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -31,7 +31,7 @@
 						<div class="relative group">
 							<div class="w-32 h-32 rounded-[2.5rem] bg-white p-1.5 shadow-xl shadow-gray-200 group-hover:scale-105 transition-transform duration-500">
 								<div class="w-full h-full rounded-[2rem] bg-gray-900 flex items-center justify-center text-white text-4xl font-black italic shadow-inner">
-									${user.name.substring(0,1).toUpperCase()}
+									${sessionScope.userName.substring(0,1).toUpperCase()}
 								</div>
 							</div>
 							<div class="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-xl border-4 border-white flex items-center justify-center text-white shadow-lg">
@@ -41,7 +41,7 @@
 
 						<!-- Basic Info -->
 						<div class="mt-6 text-center">
-							<h2 class="text-2xl font-black text-gray-900 italic tracking-tight uppercase">${user.name}</h2>
+							<h2 class="text-2xl font-black text-gray-900 italic tracking-tight uppercase">${sessionScope.userName}</h2>
 							<p class="text-sm text-gray-400 font-medium mt-1">Joined <fmt:formatDate value="${user.createdAt}" pattern="MMMM yyyy"/></p>
 							
 							<c:if test="${user.rating > 0}">
